@@ -26,44 +26,6 @@
                             </div>
                         </div>
                     </div>
-
-                    <div class="panel">
-                        <div class="panel-heading">
-                            <a data-toggle="collapse" data-parent="#accordion-1" href="#collapse-2" class="plus">where
-                                can I find tracking number?<span>&nbsp;</span>
-                            </a>
-                        </div>
-                        <div id="collapse-2" class="panel-collapse collapse">
-                            <div class="panel-body">
-                                We possess within us two minds. So far I have written only of the conscious mind. I
-                                would now like to introduce you to your second mind, the hidden and mysterious
-                                subconscious. Our subconscious mind contains such power and complexity that it literally
-                                staggers the imagination.And finally the subconscious is the mechanism through which
-                                thought impulses which are repeated regularly with feeling and emotion are quickened,
-                                charged. Our subconscious mind contains such power and complexity that it literally
-                                staggers the imagination.
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="panel">
-                        <div class="panel-heading">
-                            <a data-toggle="collapse" data-parent="#accordion-1" href="#collapse-3" class="plus">what
-                                delivery methods can I use?<span>&nbsp;</span>
-                            </a>
-                        </div>
-                        <div id="collapse-3" class="panel-collapse collapse">
-                            <div class="panel-body">
-                                We possess within us two minds. So far I have written only of the conscious mind. I
-                                would now like to introduce you to your second mind, the hidden and mysterious
-                                subconscious. Our subconscious mind contains such power and complexity that it literally
-                                staggers the imagination.And finally the subconscious is the mechanism through which
-                                thought impulses which are repeated regularly with feeling and emotion are quickened,
-                                charged. Our subconscious mind contains such power and complexity that it literally
-                                staggers the imagination.
-                            </div>
-                        </div>
-                    </div>
                 </div> <!-- end accordion -->
 
 
@@ -106,8 +68,7 @@
 
                     <div class="panel">
                         <div class="panel-heading">
-                            <a data-toggle="collapse" data-parent="#accordion-2" href="#collapse-6" class="plus">what
-                                credit cards do you accept?<span>&nbsp;</span>
+                            <a data-toggle="collapse" data-parent="#accordion-2" href="#collapse-6" class="plus">what credit cards do you accept?<span>&nbsp;</span>
                             </a>
                         </div>
                         <div id="collapse-6" class="panel-collapse collapse">
@@ -122,26 +83,6 @@
                             </div>
                         </div>
                     </div>
-
-                    <div class="panel">
-                        <div class="panel-heading">
-                            <a data-toggle="collapse" data-parent="#accordion-2" href="#collapse-7" class="plus">how to
-                                pay via paypal?<span>&nbsp;</span>
-                            </a>
-                        </div>
-                        <div id="collapse-7" class="panel-collapse collapse">
-                            <div class="panel-body">
-                                We possess within us two minds. So far I have written only of the conscious mind. I
-                                would now like to introduce you to your second mind, the hidden and mysterious
-                                subconscious. Our subconscious mind contains such power and complexity that it literally
-                                staggers the imagination.And finally the subconscious is the mechanism through which
-                                thought impulses which are repeated regularly with feeling and emotion are quickened,
-                                charged. Our subconscious mind contains such power and complexity that it literally
-                                staggers the imagination.
-                            </div>
-                        </div>
-                    </div>
-
                 </div> <!-- end accordion -->
 
             </div> <!-- end col -->
@@ -159,9 +100,6 @@
                         <li>
                             <a href="#">Support</a>
                         </li>
-                        <li>
-                            <a href="#">Common questions</a>
-                        </li>
                     </ul>
                 </div>
 
@@ -169,13 +107,13 @@
                     <h6>Information</h6>
                     <ul>
                         <li>
-                            <i class="fa fa-envelope"></i><a href="mailto:theme@support.com">theme@support.com</a>
+                            <i class="fa fa-envelope"></i><a href="bspji.banjarbaru@gmail.com">bspji.banjarbaru@gmail.com</a>
                         </li>
                         <li>
-                            <i class="fa fa-phone"></i><span>+1 (800) 888 5260 52 63</span>
+                            <i class="fa fa-phone"></i><span>(0511) 4774861, 4772461</span>
                         </li>
                         <li>
-                            <i class="fa fa-skype"></i><span>zennashop</span>
+                            <i class="fa fa-building"></i><span>BSPJI BANJARBARU</span>
                         </li>
                     </ul>
                 </div>

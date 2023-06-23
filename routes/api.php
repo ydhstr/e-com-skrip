@@ -45,6 +45,7 @@ Route::group([
             Route::get('pesanan/dikemas', [OrderController::class, 'dikemas']);
             Route::get('pesanan/dikirim', [OrderController::class, 'dikirim']);
             Route::get('pesanan/diterima', [OrderController::class, 'diterima']);
+            Route::get('pesanan/refund', [OrderController::class, 'refund']);
             Route::get('pesanan/selesai', [OrderController::class, 'selesai']);
         
             Route::post('pesanan/ubah_status/{order}', [OrderController::class, 'ubah_status']);

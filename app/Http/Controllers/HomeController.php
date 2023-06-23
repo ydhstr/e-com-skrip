@@ -263,4 +263,9 @@ class HomeController extends Controller
     {
         return view('home.faq');
     }
+    
+    public function profile()
+    {
+        return view('profile.profile');
+    }
 }

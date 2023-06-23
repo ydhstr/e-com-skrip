@@ -9,12 +9,12 @@ use Illuminate\Support\Facades\Validator;
 
 class CategoryController extends Controller
 {
-    public function __construct()
+    /* public function __construct()
     {
         $this->middleware('auth')->only(['list']);
         $this->middleware('auth:api')->only(['store', 'update', 'destroy']);
     }
-
+ */
     public function list()
     {
         return view('kategori.index');
@@ -41,7 +41,10 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        $category = Category::all();
+        return view('kategori.index', [
+            'data' => $category
+        ]);
     }
 
     /**
@@ -75,11 +78,11 @@ class CategoryController extends Controller
         }
 
         $category = Category::create($input);
-
-        return response()->json([
+        return redirect('/kategori')->with(['success' => 'Pesan Berhasil']);
+       /*  return response()->json([
             'success' => true,
             'data' => $category
-        ]);
+        ]); */
     }
 
     /**
@@ -90,9 +93,9 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        return response()->json([
+        /* return response()->json([
             'data' => $category
-        ]);
+        ]); */
     }
 
     /**

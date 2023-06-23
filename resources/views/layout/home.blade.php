@@ -240,7 +240,7 @@
                                 <div class="widget footer-links">
                                     <h5 class="widget-title bottom-line left-align grey">Account</h5>
                                     <ul class="list-no-dividers">
-                                        <li><a href="/#">My account</a></li>
+                                        <li><a href="/profile">My account</a></li>
                                         <li><a href="/#">Wishlist</a></li>
                                         <li><a href="/#">Order history</a></li>
                                         <li><a href="/#">Specials</a></li>

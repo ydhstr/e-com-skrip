@@ -41,7 +41,7 @@ Route::get('/pesanan/dikonfirmasi', [OrderController::class, 'dikonfirmasi_list'
 Route::get('/pesanan/dikemas', [OrderController::class, 'dikemas_list']);
 Route::get('/pesanan/dikirim', [OrderController::class, 'dikirim_list']);
 Route::get('/pesanan/diterima', [OrderController::class, 'diterima_list']);
-Route::get('/pesanan/selesai', [OrderController::class, 'selesai_list']);
+Route::get('/pesanan/refund', [OrderController::class, 'refund_list']);
 Route::get('/pesanan/selesai', [OrderController::class, 'selesai_list']);
 
 Route::get('/laporan', [ReportController::class, 'index']);
@@ -65,6 +65,7 @@ Route::get('/orders', [HomeController::class, 'orders']);
 Route::get('/about', [HomeController::class, 'about']);
 Route::get('/contact', [HomeController::class, 'contact']);
 Route::get('/faq', [HomeController::class, 'faq']);
+Route::get('/profile', [HomeController::class, 'profile']);
 
 Route::post('/add_to_cart', [HomeController::class, 'add_to_cart']);
 Route::get('/delete_from_cart/{cart}', [HomeController::class, 'delete_from_cart']);

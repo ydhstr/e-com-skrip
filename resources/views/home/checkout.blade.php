@@ -99,7 +99,6 @@
                             <div id="payment" class="ecommerce-checkout-payment">
                                 <h2 class="heading uppercase bottom-line full-grey">Payment Method</h2>
                                 <ul class="payment_methods methods">
-
                                     <li class="payment_method_bacs">
                                         <input id="payment_method_bacs" type="radio" class="input-radio"
                                             name="payment_method" value="bacs" checked="checked">
@@ -112,6 +111,14 @@
                                             <p>No Rekening : {{$about->no_rekening}}</p>
                                         </div>
                                     </li>
+                                    <li class="payment_method_cheque">
+                          <input id="payment_method_cheque" type="radio" class="input-radio" name="payment_method" value="cheque">
+                          <label for="payment_method_cheque">Cash On Delivery</label>
+                          <div class="payment_box payment_method_cheque">
+                            <p>Please send your cheque to Store Name, Store Street, Store Town, Store State / County, Store Postcode.</p>
+                          </div>
+                        </li>
+
                                 </ul>
                                 <div class="form-row place-order">
                                     <input type="submit" name="ecommerce_checkout_place_order"

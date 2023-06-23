@@ -10,11 +10,11 @@ use Illuminate\Support\Facades\Validator;
 
 class SubcategoryController extends Controller
 {
-    public function __construct()
+   /*  public function __construct()
     {
         $this->middleware('auth')->only(['list']);
         $this->middleware('auth:api')->only(['store', 'update', 'destroy']);
-    }
+    } */
     /**
      * Display a listing of the resource.
      *
@@ -43,7 +43,10 @@ class SubcategoryController extends Controller
      */
     public function create()
     {
-        //
+        $subcategory = Subcategory::all();
+        return view('subkategori.index', [
+            'data' => $subcategory
+        ]);
     }
 
     /**
@@ -79,10 +82,11 @@ class SubcategoryController extends Controller
 
         $Subcategory = Subcategory::create($input);
 
-        return response()->json([
+        return redirect('/subkategori')->with(['success' => 'Pesan Berhasil']);
+        /* return response()->json([
             'success' => true,
             'data' => $Subcategory
-        ]);
+        ]); */
     }
 
     /**

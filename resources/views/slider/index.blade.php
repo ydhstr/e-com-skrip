@@ -11,17 +11,17 @@
     </div>
     <div class="card-body">
         <div class="d-flex justify-content-end mb-4">
-            <a href="#modal-form" class="btn btn-primary modal-tambah">Tambah Data</a>
+            <a href="#modal-form" data-toggle="modal" class="btn btn-primary modal-tambah">Tambah Data</a>
         </div>
         <div class="table-responsive">
             <table class="table table-bordered table-hover table-striped">
                 <thead>
                     <tr>
+                        <th>Aksi</th>
                         <th>No</th>
                         <th>Nama Slider</th>
                         <th>Deskripsi</th>
                         <th>Gambar</th>
-                        <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody></tbody>
@@ -42,20 +42,21 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="col-md-12">
-                        <form class="form-slider">
+                        <form action="{{ route('sliders.store') }}" class="form-slider" method="POST" enctype="multipart/form-data">
+                        @csrf
                             <div class="form-group">
                                 <label for="">Nama slider</label>
-                                <input type="text" class="form-control" name="nama_slider" placeholder="Nama slider"
+                                <input value="{{ old('nama_slider') }}" type="text" class="form-control" name="nama_slider" placeholder="Nama slider"
                                     required>
                             </div>
-                            <div class="form-group">
+                            <div value="{{ old('deskripsi') }}" class="form-group">
                                 <label for="">Deskripsi</label>
                                 <textarea name="deskripsi" placeholder="Deskripsi" class="form-control" id="" cols="30"
                                     rows="10" required></textarea>
                             </div>
                             <div class="form-group">
                                 <label for="">Gambar</label>
-                                <input type="file" class="form-control" name="gambar">
+                                <input value="{{ old('gambar') }}" type="file" class="form-control" name="gambar">
                             </div>
                             <div class="form-group">
                                 <button type="submit" class="btn btn-primary btn-block">Submit</button>
@@ -87,14 +88,15 @@
                 data.map(function(val, index) {
                     row += `
                         <tr>
-                            <td>${index+1}</td>
-                            <td>${val.nama_slider}</td>
-                            <td>${val.deskripsi}</td>
-                            <td><img src="/uploads/${val.gambar}" width="150"></td>
-                            <td>
+                            <td width="150">
                                 <a href="#modal-form" data-id="${val.id}" class="btn btn-warning modal-ubah">Edit</a>
                                 <a href="#" data-id="${val.id}" class="btn btn-danger btn-hapus">hapus</a>
                             </td>
+                            <td>${index+1}</td>
+                            <td>${val.nama_slider}</td>
+                            <td>${val.deskripsi}</td>
+                            <td width="200"><img src="/uploads/${val.gambar}" width="150"></td>
+                            
                         </tr>
                         `;
                 });
@@ -128,7 +130,7 @@
 
         });
 
-        $('.modal-tambah').click(function() {
+       /*  $('.modal-tambah').click(function() {
             $('#modal-form').modal('show')
             $('input[name="nama_slider"]').val('')
             $('textarea[name="deskripsi"]').val('')
@@ -156,7 +158,7 @@
                     }
                 })
             });
-        });
+        }); */
 
         $(document).on('click', '.modal-ubah', function() {
             $('#modal-form').modal('show')

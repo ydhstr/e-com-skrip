@@ -66,6 +66,7 @@
                                 <select name="status" id="status" class="form-control">
                                     <option value="DITERIMA">DITERIMA</option>
                                     <option value="DITOLAK">DITOLAK</option>
+                                    <option value="COD">CASH ON DELIVERY</option>
                                     <option value="MENUNGGU">MENUNGGU</option>
                                 </select>
                             </div>

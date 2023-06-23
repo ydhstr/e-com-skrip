@@ -11,11 +11,11 @@ use Illuminate\Support\Facades\Validator;
 
 class ProductController extends Controller
 {
-    public function __construct()
+    /* public function __construct()
     {
         $this->middleware('auth')->only(['list']);
         $this->middleware('auth:api')->only(['store', 'update', 'destroy']);
-    }
+    } */
 
     public function list()
     {
@@ -46,7 +46,10 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        $products = Product::all();
+        return view('product.index', [
+            'data' => $products
+        ]);
     }
 
     /**
@@ -91,10 +94,11 @@ class ProductController extends Controller
 
         $Product = Product::create($input);
 
-        return response()->json([
+        return redirect('/barang')->with(['success' => 'Pesan Berhasil']);
+        /* return response()->json([
             'success' => true,
             'data' => $Product
-        ]);
+        ]); */
     }
 
     /**

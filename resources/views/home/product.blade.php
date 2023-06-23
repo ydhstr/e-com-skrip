@@ -79,6 +79,9 @@
                 </ol>
                 <h1 class="product-title">{{$product->nama_barang}}</h1>
                 <span class="price">
+                <del>
+                  <span>Rp. {{number_format($product->harga)}}</span>
+                </del>
                     <ins>
                         <span class="amount">Rp. {{number_format($product->harga)}}</span>
                     </ins>
@@ -124,9 +127,7 @@
                             </a>
                         </div>
                     </div>
-
-                    <a href="#" class="btn btn-dark btn-lg add-to-cart"><span>Add to Cart</span></a>
-
+                    <a href="/login_member" class="btn btn-dark btn-lg add-to-cart"><span>Add to Cart</span></a>
                     <a href="#" class="product-add-to-wishlist"><i class="fa fa-heart"></i></a>
                 </div>
 
@@ -255,41 +256,51 @@
 </section> <!-- end related products -->
 
 @endsection
-
-
 @push('js')
 <script>
     $(function(){
         $('.add-to-cart').click(function(e){
-            id_member = {{Auth::guard('webmember')->user()->id}}
-            id_barang = {{$product->id}}
-            jumlah = $('.jumlah').val()
-            size = $('.size').val()
-            color = $('.color').val()
-            total = {{$product->harga}}*jumlah
-            is_checkout = 0
+            var id_member = null;
+            var id_barang = {{$product->id}};
+            var jumlah = $('.jumlah').val();
+            var size = $('.size').val();
+            var color = $('.color').val();
+            var total = {{$product->harga}} * jumlah;
+            var is_checkout = 0;
+
+            @auth('webmember')
+                id_member = {{Auth::guard('webmember')->user()->id}};
+            @endauth
 
             $.ajax({
-                url : '/add_to_cart',
-                method : "POST",
+                url: '/add_to_cart',
+                method: 'POST',
                 headers: {
                     'X-CSRF-TOKEN': "{{csrf_token()}}",
                 },
-                data : {
-                    id_member,
-                    id_barang,
-                    jumlah,
-                    size,
-                    color,
-                    total,
-                    is_checkout,
+                data: {
+                    id_member: id_member,
+                    id_barang: id_barang,
+                    jumlah: jumlah,
+                    size: size,
+                    color: color,
+                    total: total,
+                    is_checkout: is_checkout,
                 },
-                success : function(data){
-                    window.location.href = '/cart'
+                success: function(response) {
+                    if (response === 'success') {
+                        id_member = id_member || ""; // Set id_member to an empty string if it's null
+                    } else if (response === 'failed') {
+                        window.location.replace("failed");
+                    }
+                    window.location.href = '/cart';
+                },
+                error: function() {
+                    // Handle error cases if necessary
                 }
-            });
-        })
-    })
-
+            })
+        });
+    });
 </script>
 @endpush
+

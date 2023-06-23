@@ -13,7 +13,7 @@ class OrderController extends Controller
     public function __construct()
     {
         $this->middleware('auth')->only(['list', 'dikonfirmasi_list', 'dikemas_list', 'dikirim_list', 'diterima_list', 'selesai_list']);
-        $this->middleware('auth:api')->only(['store', 'update', 'destroy', 'ubah_status', 'baru', 'dikonfirmasi', 'dikemas', 'dikirim', 'diterima', 'selesai']);
+        $this->middleware('auth:api')->only(['store', 'update', 'destroy', 'ubah_status', 'baru', 'dikonfirmasi', 'dikemas', 'dikirim', 'diterima','refund', 'selesai']);
     }
     /**
      * Display a listing of the resource.
@@ -51,6 +51,11 @@ class OrderController extends Controller
     public function diterima_list()
     {
         return view('pesanan.diterima');
+    }
+
+    public function refund_list()
+    {
+        return view('pesanan.refund');
     }
 
     public function selesai_list()
@@ -225,6 +230,15 @@ class OrderController extends Controller
     public function diterima()
     {
         $orders = Order::with('member')->where('status', 'Diterima')->get();
+
+        return response()->json([
+            'data' => $orders
+        ]);
+    }
+
+    public function refund()
+    {
+        $orders = Order::with('member')->where('status', 'Refund')->get();
 
         return response()->json([
             'data' => $orders

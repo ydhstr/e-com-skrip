@@ -9,11 +9,11 @@ use Illuminate\Support\Facades\Validator;
 
 class SliderController extends Controller
 {
-    public function __construct()
+   /*  public function __construct()
     {
         $this->middleware('auth')->only(['list']);
         $this->middleware('auth:api')->only(['store', 'update', 'destroy']);
-    }
+    } */
 
     public function list()
     {
@@ -44,7 +44,10 @@ class SliderController extends Controller
      */
     public function create()
     {
-        //
+        $sliders = Slider::all();
+        return view('slider.index', [
+            'data' => $sliders
+        ]);
     }
 
     /**
@@ -79,10 +82,11 @@ class SliderController extends Controller
 
         $Slider = Slider::create($input);
 
-        return response()->json([
+        return redirect('/slider')->with(['success' => 'Pesan Berhasil']);
+       /*  return response()->json([
             'success' => true,
             'data' => $Slider
-        ]);
+        ]); */
     }
 
     /**

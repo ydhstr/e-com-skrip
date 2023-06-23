@@ -34,7 +34,7 @@
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/dashboard">
                 <div class="sidebar-brand-icon">
-                    <img src="/uploads/favicon.png" alt="" class="logo"style="width:55px;height:55px;>
+                    <img src="/uploads/favicon.png"alt="" class="logo"style="width:50px;height:50px;>
                 <div class="sidebar-brand-text mx-5">SAHABAT IKM</div>
             </a>
 
@@ -76,6 +76,7 @@
                         <a class="collapse-item" href="/pesanan/dikemas">Pesanan Dikemas</a>
                         <a class="collapse-item" href="/pesanan/dikirim">Pesanan Dikirim</a>
                         <a class="collapse-item" href="/pesanan/diterima">Pesanan Diterima</a>
+                        <a class="collapse-item" href="/pesanan/refund">Pesanan Refund</a>
                         <a class="collapse-item" href="/pesanan/selesai">Pesanan Selesai</a>
                     </div>
                 </div>
@@ -138,7 +139,7 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Admin</span>
                                 <img class="img-profile rounded-circle" src="/sbadmin2/img/undraw_profile.svg">
                             </a>
                             <!-- Dropdown - User Information -->
