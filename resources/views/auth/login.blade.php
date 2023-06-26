@@ -20,7 +20,7 @@
 
     <!-- Custom styles for this template-->
     <link href="/sbadmin2/css/sb-admin-2.min.css" rel="stylesheet">
-
+    <link rel="shortcut icon" href="/uploads/favicon.png">
 </head>
 
 <body class="bg-gradient-primary">

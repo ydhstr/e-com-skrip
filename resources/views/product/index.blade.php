@@ -27,8 +27,9 @@
                         <th>Bahan</th>
                         <th>Sku</th>
                         <th>Ukuran</th>
+                        <th>Stock</th>
                         <th>Warna</th>
-                        <th>Gambar</th>
+                        <th style="text-align: center;">Gambar</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -100,6 +101,10 @@
                                 <label for="">Ukuran</label>
                                 <input value="{{ old('ukuran') }}" type="text" class="form-control" name="ukuran" placeholder="Ukuran">
                             </div>
+                            <div class="form-group">
+                                <label for="">Stock</label>
+                                <input value="{{ old('stock') }}" type="text" class="form-control" name="stock" placeholder="Stock">
+                            </div>
                             <div value="{{ old('deskripsi') }}" class="form-group">
                                 <label for="">Deskripsi</label>
                                 <textarea name="deskripsi" placeholder="Deskripsi" class="form-control" id="" cols="30"
@@ -152,6 +157,7 @@
                             <td>${val.bahan}</td>
                             <td>${val.sku}</td>
                             <td>${val.ukuran}</td>
+                            <td>${val.stock}</td>
                             <td>${val.warna}</td>
                             <td><img src="/uploads/${val.gambar}" width="150"></td>
                         </tr>
@@ -233,6 +239,7 @@
                 $('input[name="bahan"]').val(data.bahan);
                 $('input[name="sku"]').val(data.sku);
                 $('input[name="ukuran"]').val(data.ukuran);
+                $('input[name="stock"]').val(data.stock);
                 $('input[name="warna"]').val(data.warna);
                 $('textarea[name="deskripsi"]').val(data.deskripsi);
             });

@@ -14,6 +14,7 @@
             <table class="table table-bordered table-hover table-striped">
                 <thead>
                     <tr>
+                        <th>Aksi</th>
                         <th>No</th>
                         <th>Tanggal</th>
                         <th>Order</th>
@@ -21,7 +22,6 @@
                         <th>No Rekening</th>
                         <th>Atas Nama</th>
                         <th>Status</th>
-                        <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody></tbody>
@@ -99,9 +99,13 @@
                 let row;
                 data.map(function(val, index) {
                     tgl = new Date(val.created_at)
+                    tgl.setMonth(tgl.getMonth() + 1);
                     tgl_lengkap = `${tgl.getDate()}-${tgl.getMonth()}-${tgl.getFullYear()}`
                     row += `
                         <tr>
+                            <td>
+                                <a href="#modal-form" data-id="${val.id}" class="btn btn-warning modal-ubah">Edit</a>
+                            </td>
                             <td>${index+1}</td>
                             <td>${tgl_lengkap}</td>
                             <td>${val.id_order}</td>
@@ -109,9 +113,6 @@
                             <td>${val.no_rekening}</td>
                             <td>${val.atas_nama}</td>
                             <td>${val.status}</td>
-                            <td>
-                                <a href="#modal-form" data-id="${val.id}" class="btn btn-warning modal-ubah">Edit</a>
-                            </td>
                         </tr>
                         `;
                 });

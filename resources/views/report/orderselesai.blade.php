@@ -1,12 +1,12 @@
 @extends('layout.app')
 
-@section('title', 'Laporan Penjualan')
+@section('title', 'Laporan Order Selesai')
 
 @section('content')
 <div class="card shadow">
     <div class="card-header">
         <h4 class="card-title">
-            Laporan Penjualan
+            Laporan Order Selesai
         </h4>
     </div>
     <div class="card-body">
@@ -36,10 +36,11 @@
                 <thead>
                     <tr>
                         <th>No</th>
-                        <th>Nama Barang</th>
-                        <th>Harga</th>
-                        <th>Jumlah Dibeli</th>
-                        <th>Total Qty</th>
+                        <th>Tanggal Pesanan</th>
+                        <th>Invoice</th>
+                        <th>Member</th>
+                        <th>Total</th>
+                        <th>Status</th>
                     </tr>
                 </thead>
                 <tbody></tbody>
@@ -74,7 +75,6 @@
         }
 
         const token = localStorage.getItem('token')
-
         $.ajax({
             url: `/api/reports/orderselesai?dari=${dari}&sampai=${sampai}`,
             headers: {
@@ -85,13 +85,17 @@
             }) {
                 let row;
                 data.map(function(val, index) {
+                    tgl = new Date(val.created_at)
+                    tgl.setMonth(tgl.getMonth() + 1);
+                    tgl_lengkap = `${tgl.getDate()}-${tgl.getMonth()}-${tgl.getFullYear()}`
                     row += `
                         <tr>
                             <td>${index+1}</td>
-                            <td>${val.nama_barang}</td>
-                            <td>${rupiah(val.harga)}</td>
-                            <td>${val.jumlah_dibeli}</td>
-                            <td>${val.total_qty}</td>
+                            <td>${tgl_lengkap}</td>
+                            <td>${val.invoice}</td>
+                            <td>${val.nama_member}</td>
+                            <td>${rupiah(val.grand_total)}</td>
+                            <td>${val.status}</td>
                         </tr>
                         `;
                 });

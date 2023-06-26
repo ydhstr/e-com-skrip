@@ -15,9 +15,8 @@
         }
     </style>
     <center>
-        <h5>Laporan Data Pesanan
-
-        </h5>
+        <h5>Laporan Data Pesanan</h5>
+        <h6>{{ request()->input('dari') }} - {{ request()->input('sampai') }}</h6>
     </center>
 
     <br>
@@ -34,57 +33,20 @@
             </tr>
         </thead>
         <tbody>
-           
-@push('js')
-<script>
-    $(function() {
-
-        const dari = '{{ request()->input('dari') }}'
-        const sampai = '{{ request()->input('sampai') }}'
-
-        function rupiah(angka){
-            const format = angka.toString().split('').reverse().join('');
-            const convert = format.match(/\d{1,3}/g);
-            return 'Rp ' + convert.join('.').split('').reverse().join('')
-        }
-
-        const token = localStorage.getItem('token')
-
-        $.ajax({
-            url: `/api/reports?dari=${dari}&sampai=${sampai}`,
-            headers: {
-                "Authorization": 'Bearer ' + token
-            },
-            success: function({
-                data
-            }) {
-                let row;
-                data.map(function(val, index) {
-                    row += `
-                        <tr>
-                            <td>${index+1}</td>
-                            <td>${val.nama_barang}</td>
-                            <td>${rupiah(val.harga)}</td>
-                            <td>${val.jumlah_dibeli}</td>
-                            <td>${val.total_qty}</td>
-                            <td>${rupiah(val.pendapatan)}</td>
-                        </tr>
-                        `;
-                });
-                $('tbody').append(row)
-            }
-        });
-
-    });
-</script>
-@endpush
-                <tr>
-                    <td class="text-center" colspan="7">Tidak ada data untuk ditampilkan</td>
-                </tr>
-            @endforelse
+        @forelse ($reports as $index => $data)
+        <tr>
+            <td>{{ $index + 1 }}</td>
+            <td>{{ $data->nama_barang }}</td>
+            <td>{{ $data->harga }}</td>
+            <td>{{ $data->jumlah_dibeli }}</td>
+            <td>{{ $data->total_qty }}</td>
+            <td>{{ $data->pendapatan }}</td>
+        </tr>
+    @empty
+        <tr>
+            <td class="text-center" colspan="6">Tidak ada data untuk ditampilkan</td>
+        </tr>
+    @endforelse
         </tbody>
     </table>
-
-</body>
-
-</html>
+    </html>

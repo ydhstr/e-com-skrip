@@ -49,6 +49,7 @@ Route::get('/laporan/penjualan', [ReportController::class, 'penjualan_list']);
 Route::get('/laporan/pembayaran', [ReportController::class, 'pembayaran_list']);
 Route::get('/laporan/orderselesai', [ReportController::class, 'orderselesai_list']);
 Route::get('/laporan/barangdiminati', [ReportController::class, 'barangdiminati_list']);
+Route::get('/laporan/codreport', [ReportController::class, 'codreports_list']);
 
 Route::get('/tentang', [TentangController::class, 'index']);
 Route::post('/tentang/{about}', [TentangController::class, 'update']);
@@ -66,6 +67,7 @@ Route::get('/about', [HomeController::class, 'about']);
 Route::get('/contact', [HomeController::class, 'contact']);
 Route::get('/faq', [HomeController::class, 'faq']);
 Route::get('/profile', [HomeController::class, 'profile']);
+Route::get('/profileikm', [HomeController::class, 'profileikm']);
 
 Route::post('/add_to_cart', [HomeController::class, 'add_to_cart']);
 Route::get('/delete_from_cart/{cart}', [HomeController::class, 'delete_from_cart']);
@@ -74,3 +76,6 @@ Route::get('/get_ongkir/{destination}/{weight}', [HomeController::class, 'get_on
 Route::post('/checkout_orders', [HomeController::class, 'checkout_orders']);
 Route::post('/payments', [HomeController::class, 'payments']);
 Route::post('/pesanan_selesai/{order}', [HomeController::class, 'pesanan_selesai']);
+
+//laporan pdf
+Route::get('/laporan/pdf', [ReportController::class, 'pdf1']);

@@ -213,12 +213,12 @@
                             <div class="col-md-3 col-sm-12 col-xs-12">
                                 <div class="widget footer-about-us">
                                     <img src="/uploads/16749800219.png" alt="" class="logo">
-                                    <p class="mb-30">Sahabat IKM adalah</p>
+                                    <p class="mb-30">Sahabat IKM adalah program kegiatan yang bertujuan untuk memaksimalkan dalam pembinaan IKM dan kontribusi untuk kemajuan industri di Banua yang berdaya saing.</p>
                                     <div class="footer-socials">
                                         <div class="social-icons nobase">
-                                            <a href="/#"><i class="fa fa-twitter"></i></a>
-                                            <a href="/#"><i class="fa fa-facebook"></i></a>
-                                            <a href="/#"><i class="fa fa-google-plus"></i></a>
+                                            <a href="https://twitter.com/bspjibanjarbaru" target="_blank"><i class="fa fa-twitter"></i></a>
+                                            <a href="https://web.facebook.com/people/BSPJI-Banjarbaru/100084747339431/?paipv=0&eav=AfbE3Py10_R2TgCjw3D-m1T8JF8O7xkA5R3xL6xJeibJIMYHU3V9qOOhtJ1ngiU2Tyw&_rdc=1&_rdr" target="_blank"><i class="fa fa-facebook"></i></a>
+                                            <a href="https://www.instagram.com/bspji_banjarbaru/"><i class="fa fa-instagram" target="_blank"></i></a>
                                         </div>
                                     </div>
                                 </div>
@@ -229,8 +229,7 @@
                                     <h5 class="widget-title bottom-line left-align grey">Information</h5>
                                     <ul class="list-no-dividers">
                                         <li><a href="/#">Our stores</a></li>
-                                        <li><a href="/#">About us</a></li>
-                                        <li><a href="/#">Business with us</a></li>
+                                        <li><a href="/about">Tentang kami</a></li>
                                         <li><a href="/#">Delivery information</a></li>
                                     </ul>
                                 </div>
@@ -241,21 +240,8 @@
                                     <h5 class="widget-title bottom-line left-align grey">Account</h5>
                                     <ul class="list-no-dividers">
                                         <li><a href="/profile">My account</a></li>
-                                        <li><a href="/#">Wishlist</a></li>
-                                        <li><a href="/#">Order history</a></li>
-                                        <li><a href="/#">Specials</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-
-                            <div class="col-md-2 col-sm-6 col-xs-12">
-                                <div class="widget footer-links">
-                                    <h5 class="widget-title bottom-line left-align grey">Useful Links</h5>
-                                    <ul class="list-no-dividers">
-                                        <li><a href="/#">Shipping Policy</a></li>
-                                        <li><a href="/#">Stores</a></li>
-                                        <li><a href="/#">Returns</a></li>
-                                        <li><a href="/#">Terms &amp; Conditions</a></li>
+                                        <li><a href="/orders">Order history</a></li>
+                                        <li><a href="/profileikm">Specials</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -266,8 +252,8 @@
                                     <ul class="list-no-dividers">
                                         <li><a href="/#">Support</a></li>
                                         <li><a href="/#">Warranty</a></li>
-                                        <li><a href="/#">FAQ</a></li>
-                                        <li><a href="/#">Contact</a></li>
+                                        <li><a href="/faq">FAQ</a></li>
+                                        <li><a href="/contact">Contact</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -286,7 +272,6 @@
                                 <i class="fa fa-cc-discover"></i>
                                 <i class="fa fa-cc-amex"></i>
                             </div>
-
                         </div>
                     </div>
                 </div> <!-- end bottom footer -->

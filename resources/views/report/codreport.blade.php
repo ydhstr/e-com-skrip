@@ -1,12 +1,12 @@
 @extends('layout.app')
 
-@section('title', 'Laporan Pembayaran')
+@section('title', 'Laporan Pembayaran COD')
 
 @section('content')
 <div class="card shadow">
     <div class="card-header">
         <h4 class="card-title">
-            Laporan Pembayaran
+            Laporan Pembayaran COD
         </h4>
     </div>
     <div class="card-body">
@@ -60,7 +60,6 @@
 </div>
 
 @endsection
-
 
 @push('js')
 <script>

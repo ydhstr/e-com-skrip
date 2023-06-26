@@ -55,5 +55,6 @@ Route::group([
             Route::get('reports/pembayaran', [ReportController::class, 'pembayaran']);
             Route::get('reports/orderselesai', [ReportController::class, 'orderselesai']);
             Route::get('reports/barangdiminati', [ReportController::class, 'barangdiminati']);
+            Route::get('reports/codreport', [ReportController::class, 'pembayarancod']);
         }
     );

@@ -15,7 +15,6 @@
             <div class="col-md-6">
                 <form>
                     <div class="form-group">
-                        di
                         <label for="">Dari</label>
                         <input type="date" name="dari" id="dari" class="form-control"
                             value="{{request()->input('dari')}}">
@@ -48,8 +47,7 @@
             </table>
             <div class="card-footer">
                 <div class="text-right">
-                    <a href="#" class="btn btn-danger btn-sm"
-                        id="export-pdf">
+                    <a href="/laporan/pdf" class="btn btn-danger btn-sm">
                         <i class="fa fa-file-pdf"></i> Export PDF
                     </a>
                 </div>

@@ -1114,8 +1114,10 @@ header .flex-child.flex-right {
 }
 
 .logo,
-.logo-dark {
-  max-height: 18px;
+.logo-dark2 {
+  /* max-height: 18px; */
+  width: 100%;
+  height: auto;
 }
 
 .navbar-header,
@@ -2210,8 +2212,11 @@ input.main-search-input:-ms-input-placeholder {
 }
 
 .hero-slide {
+  background-position: center;
+  background-repeat: repeat;
   background-size: cover;
-  background-position: center center;
+  height: 400px; /* Adjust the height as per your desired banner size */
+  width: 100%;
 }
 
 .hero-holder {

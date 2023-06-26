@@ -32,10 +32,11 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/dashboard">
+            <a class="sidebar-brand d-flex align-items-center justify-content-start" href="/dashboard" style="padding: 10px;">
                 <div class="sidebar-brand-icon">
-                    <img src="/uploads/favicon.png"alt="" class="logo"style="width:50px;height:50px;>
-                <div class="sidebar-brand-text mx-5">SAHABAT IKM</div>
+                    <img src="/uploads/favicon.png"alt="" class="logo"style="width:50px;height:50px;">
+                    </div>
+                <div class="sidebar-brand-text mx-1">SAHABAT IKM</div>
             </a>
 
             <!-- Divider -->
@@ -99,6 +100,8 @@
                         <a class="collapse-item" href="/laporan/pembayaran">Laporan Pembayaran</a>
                         <a class="collapse-item" href="/laporan/orderselesai">Laporan Order Selesai</a>
                         <a class="collapse-item" href="/laporan/barangdiminati">Laporan Barang Diminati</a>
+                        <a class="collapse-item" href="#">Laporan Barang Refund</a>
+                        <a class="collapse-item" href="/laporan/codreport">Laporan Pembayaran COD</a>
                     </div>
                 </div>
             </li>

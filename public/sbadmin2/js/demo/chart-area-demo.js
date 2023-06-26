@@ -54,8 +54,8 @@ var myLineChart = new Chart(ctx, {
     layout: {
       padding: {
         left: 10,
-        right: 25,
-        top: 25,
+        right: 50,
+        top: 50,
         bottom: 0
       }
     },

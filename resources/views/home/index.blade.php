@@ -2,28 +2,35 @@
 
 @section('content')
 <!-- Hero Slider -->
-<section class="hero-wrap text-center relative">
+<section class="hero-wrap text-center relative" style="height: 500px;">
     <div id="owl-hero" class="owl-carousel owl-theme light-arrows slider-animated">
         @foreach ($sliders as $slider)
         <div class="hero-slide overlay" style="background-image:url(/uploads/{{$slider->gambar}})">
-            <div class="container">
+            <!-- <div class="container">
                 <div class="hero-holder">
                     <div class="hero-message">
                         <h1 class="hero-title nocaps">{{$slider->nama_slider}}</h1>
                         <h2 class="hero-subtitle lines">{{$slider->deskripsi}}</h2>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
         @endforeach
     </div>
-</section> <!-- end hero slider -->
+</section> 
+<!-- end hero slider -->
 
 <!-- Promo Banners -->
-<section class="section-wrap promo-banners pb-30">
+<section class="section-wrap promo-banners pb-20">
     <div class="container">
+    <div class="row heading-row">
+            <div class="col-md-12 text-center">
+                <h2 class="heading bottom-line">
+                   Kategori
+                </h2>
+            </div>
+        </div>
         <div class="row">
-
             @foreach ($categories as $category)
             <div class="col-xs-4 col-xxs-12 mb-30 promo-banner">
                 <a href="/front/#">
@@ -47,9 +54,9 @@
 
         <div class="row heading-row">
             <div class="col-md-12 text-center">
-                <span class="subheading">Hot items of this year</span>
+                <span class="subheading">Item terlaris tahun ini</span>
                 <h2 class="heading bottom-line">
-                    trendy products
+                    Produk Trendi
                 </h2>
             </div>
         </div>
@@ -76,10 +83,22 @@
                                 <h3 class="product-title">
                                     <a href="/product/{{$product->id}}">{{$product->nama_barang}}</a>
                                 </h3>
-                                <span class="price">
+                                <!-- <span class="price">
                                     <ins>
                                         <span class="amount">Rp. {{number_format($product->harga)}}</span>
                                     </ins>
+                                </span> -->
+                                <span class="price">
+                    @if ($product->diskon)
+                                <del>
+                                     <span>Rp. {{number_format($product->harga)}}</span>
+                                </del>
+                                <ins>
+                                    <span class="amount">Rp. {{number_format($product->harga - $product->diskon)}}</span>
+                                </ins>
+                    @else
+                               <span>Rp. {{number_format($product->harga)}}</span>
+                    @endif
                                 </span>
                                 <div class="btn-quickview">
                                     <a href="/product/{{$product->id}}" class="btn btn-md btn-color">

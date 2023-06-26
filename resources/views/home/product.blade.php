@@ -78,13 +78,25 @@
                     </li>
                 </ol>
                 <h1 class="product-title">{{$product->nama_barang}}</h1>
-                <span class="price">
+                <!-- <span class="price">
                 <del>
                   <span>Rp. {{number_format($product->harga)}}</span>
                 </del>
                     <ins>
                         <span class="amount">Rp. {{number_format($product->harga)}}</span>
                     </ins>
+                </span> -->
+                <span class="price">
+                @if ($product->diskon)
+                  <del>
+                      <span>Rp. {{number_format($product->harga)}}</span>
+                  </del>
+                <ins>
+                       <span class="amount">Rp. {{number_format($product->harga - $product->diskon)}}</span>
+                 </ins>
+                  @else
+                       <span>Rp. {{number_format($product->harga)}}</span>
+                @endif
                 </span>
                 <p class="short-description">{{$product->deskripsi}}</p>
 

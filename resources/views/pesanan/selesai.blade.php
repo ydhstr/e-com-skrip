@@ -43,7 +43,7 @@
         function date(date) {
             var date = new Date(date);
             var day = date.getDate(); //Date of the month: 2 in our example
-            var month = date.getMonth(); //Month of the Year: 0-based index, so 1 in our example
+            var month = date.getMonth() + 1; //Month of the Year: 0-based index, so 1 in our example
             var year = date.getFullYear()
 
             return `${day}-${month}-${year}`;
