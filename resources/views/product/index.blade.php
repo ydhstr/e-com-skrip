@@ -237,6 +237,7 @@
                 $('input[name="harga"]').val(data.harga);
                 $('input[name="diskon"]').val(data.diskon);
                 $('input[name="bahan"]').val(data.bahan);
+                $('input[name="tags"]').val(data.tags);
                 $('input[name="sku"]').val(data.sku);
                 $('input[name="ukuran"]').val(data.ukuran);
                 $('input[name="stock"]').val(data.stock);

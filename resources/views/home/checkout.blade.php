@@ -71,7 +71,7 @@
                                 <input type="text" class="input-text" placeholder value name="jumlah"
                                     id="billing_first_name">
                             </p>
-
+                             <p for="">Apabila Memilih COD harap ditulis "Kosong" pada No Rekening dan Pada nominal Transfer Masukan Angaka "0" </p>
                             <div class="clear"></div>
 
                         </div>
@@ -89,8 +89,11 @@
                                     <tr class="order-total">
                                         <th><strong>Order Total</strong></th>
                                         <td>
-                                            <strong><span class="amount">Rp.
-                                                    {{number_format($orders->grand_total)}}</span></strong>
+                                        @php
+        $latestOrder = \App\Models\Order::latest('id')->first();
+        $grandTotal = $latestOrder ? $latestOrder->grand_total : 0;
+        @endphp
+        <strong><span class="amount">Rp. {{ number_format($grandTotal) }}</span></strong>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -101,7 +104,7 @@
                                 <ul class="payment_methods methods">
                                     <li class="payment_method_bacs">
                                         <input id="payment_method_bacs" type="radio" class="input-radio"
-                                            name="payment_method" value="bacs" checked="checked">
+                                            name="payment" value="Transfer" checked="checked">
                                         <label for="payment_method_bacs">Direct Bank Transfer</label>
                                         <div class="payment_box payment_method_bacs">
                                             <p>Make your payment directly into our bank account. Please use your Order
@@ -112,7 +115,7 @@
                                         </div>
                                     </li>
                                     <li class="payment_method_cheque">
-                          <input id="payment_method_cheque" type="radio" class="input-radio" name="payment_method" value="cheque">
+                          <input id="payment_method_cheque" type="radio" class="input-radio" name="payment" value="COD">
                           <label for="payment_method_cheque">Cash On Delivery</label>
                           <div class="payment_box payment_method_cheque">
                             <p>Please send your cheque to Store Name, Store Street, Store Town, Store State / County, Store Postcode.</p>

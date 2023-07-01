@@ -85,7 +85,7 @@
                                 <div class="nav-cart mobile-cart hidden-lg hidden-md">
                                     <div class="nav-cart-outer">
                                         <div class="nav-cart-inner">
-                                            <a href="/front/#" class="nav-cart-icon">
+                                            <a href="/cart" class="nav-cart-icon">
                                                 <span class="nav-cart-badge">2</span>
                                             </a>
                                         </div>
@@ -109,9 +109,17 @@
                                         @php
                                         $categories = App\Models\Category::all();
                                         @endphp
-
+                                        @foreach ($categories as $category)
                                         <li class="dropdown">
-                                            <a href="#">Shop</a>
+                                        @php
+                                                                    $subcategories =
+                                                                    App\Models\Subcategory::where('id_kategori',
+                                                                    $category->id)->get();
+                                                                    @endphp
+                                                                    @foreach ($subcategories as $subcategory)
+                                            <a href="/products/{{$subcategory->id}}">Produk</a>
+                                            @endforeach
+                                            @endforeach
                                             <i class="fa fa-angle-down dropdown-trigger"></i>
                                             <ul class="dropdown-menu megamenu-wide">
                                                 <li>
@@ -144,11 +152,15 @@
                                         </li>
 
                                         <li class="dropdown">
+                                            <a href="/#">Store</a>
+                                        </li>
+
+                                        <li class="dropdown">
                                             <a href="/faq">F.A.Q</a>
                                         </li>
 
                                         <li class="dropdown">
-                                            <a href="/contact">Contact Us</a>
+                                            <a href="/contact">Aduan</a>
                                         </li>
 
                                         <!-- Mobile search -->
@@ -228,9 +240,7 @@
                                 <div class="widget footer-links">
                                     <h5 class="widget-title bottom-line left-align grey">Information</h5>
                                     <ul class="list-no-dividers">
-                                        <li><a href="/#">Our stores</a></li>
                                         <li><a href="/about">Tentang kami</a></li>
-                                        <li><a href="/#">Delivery information</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -240,8 +250,8 @@
                                     <h5 class="widget-title bottom-line left-align grey">Account</h5>
                                     <ul class="list-no-dividers">
                                         <li><a href="/profile">My account</a></li>
+                                        <li><a href="/cart">Cart</a></li>
                                         <li><a href="/orders">Order history</a></li>
-                                        <li><a href="/profileikm">Specials</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -250,10 +260,8 @@
                                 <div class="widget footer-links">
                                     <h5 class="widget-title bottom-line left-align grey">Service</h5>
                                     <ul class="list-no-dividers">
-                                        <li><a href="/#">Support</a></li>
-                                        <li><a href="/#">Warranty</a></li>
                                         <li><a href="/faq">FAQ</a></li>
-                                        <li><a href="/contact">Contact</a></li>
+                                        <li><a href="/contact">Aduan</a></li>
                                     </ul>
                                 </div>
                             </div>

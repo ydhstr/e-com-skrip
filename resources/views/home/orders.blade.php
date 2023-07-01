@@ -16,6 +16,7 @@
                         <th>Tanggal</th>
                         <th>Nominal Transfer</th>
                         <th>Status</th>
+                        <th>Payment</th>
                     </thead>
                     <tbody>
                         @foreach ($payments as $index => $payment)
@@ -24,6 +25,7 @@
                             <td>{{$payment->created_at}}</td>
                             <td>Rp. {{number_format($payment->jumlah)}}</td>
                             <td>{{$payment->status}}</td>
+                            <td>{{$payment->payment}}</td>
                         </tr>
                         @endforeach
                     </tbody>
@@ -45,17 +47,53 @@
                             <td>{{$order->created_at}}</td>
                             <td>Rp. {{number_format($order->grand_total)}}</td>
                             <td>{{$order->status}}</td>
-                            <td>
-                                <form action="/pesanan_selesai/{{$order->id}}" method="POST">
-                                    @csrf
-                                    <button type="submit" class="btn btn-success">SELESAI</button>
-                                </form>
+                            <td>@if ($order->status != 'Selesai' && $order->status != 'Refund')
+    <form action="/pesanan_selesai/{{$order->id}}" method="POST" style="display: inline;">
+        @csrf
+        <button type="submit" class="btn btn-success">SELESAI</button>
+    </form>
+    <form action="/pesanan_refund/{{$order->id}}" method="POST" style="display: inline;">
+        @csrf
+        <button type="submit" class="btn btn-success">REFUND</button>
+    </form>
+@endif
+@if ($order->status == 'Selesai')
+    <form action="/penilaian" style="display: inline;">
+        <button type="submit" class="btn btn-success">Beri Penilaian</button>
+    </form>
+@endif
+
                             </td>
                         </tr>
                         @endforeach
                     </tbody>
                 </table>
 
+                <h2>Refund Orders</h2>
+                <table class="table table-ordered table-hover table-striped">
+                    <thead>
+                        <th>No</th>
+                        <th>Tanggal</th>
+                        <th>Grand Total</th>
+                        <th>Status</th>
+                        <th>Aksi</th>
+                    </thead>
+                    <tbody>
+                    @foreach ($orders as $index => $order)
+                    @if ($order->status === 'Refund')
+                        <tr>
+                            <td>{{$index+1}}</td>
+                            <td>{{$order->created_at}}</td>
+                            <td>Rp. {{number_format($order->grand_total)}}</td>
+                            <td>{{$order->status}}</td>
+                            <td><form action="/refund" method="POST" style="display: inline;">
+                            <button type="submit" class="btn btn-success">LAPORAN</button>
+                            </form></td>
+                        </tr>
+                        @endif
+                        @endforeach
+                    </tbody>
+                </table>
             </div> <!-- end ecommerce -->
 
         </div> <!-- end row -->

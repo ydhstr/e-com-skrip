@@ -1,12 +1,12 @@
 @extends('layout.app')
 
-@section('title', 'Data Pesanan Baru')
+@section('title', 'Data Pesanan Refund')
 
 @section('content')
 <div class="card shadow">
     <div class="card-header">
         <h4 class="card-title">
-            Data Pesanan Baru
+            Data Pesanan Refund
         </h4>
     </div>
     <div class="card-body">
@@ -52,7 +52,7 @@
 
         const token = localStorage.getItem('token')
         $.ajax({
-            url: '/api/pesanan/baru',
+            url: '/api/pesanan/Refund',
             headers: {
                 "Authorization": 'Bearer ' + token
             },
@@ -70,7 +70,7 @@
                             <td>${val.member.nama_member}</td>
                             <td>${rupiah(val.grand_total)}</td>
                             <td>
-                                <a href="#" data-id="${val.id}" class="btn btn-success btn-aksi">Konfirmasi</a>
+                                <a href="#" data-id="${val.id}" class="btn btn-success btn-aksi">Refund</a>
                             </td>
                         </tr>
                         `;

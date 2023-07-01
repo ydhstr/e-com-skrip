@@ -47,7 +47,8 @@
             </table>
             <div class="card-footer">
                 <div class="text-right">
-                    <a href="/laporan/pdf" class="btn btn-danger btn-sm">
+                    <a href="{{ route('pdf1', ['dari' => request()->input('dari'), 'sampai' => request()->input('sampai')]) }}" class="btn btn-danger btn-sm">
+                    <!-- <a href="javascript:window.print();" class="btn btn-danger btn-sm"> -->
                         <i class="fa fa-file-pdf"></i> Export PDF
                     </a>
                 </div>

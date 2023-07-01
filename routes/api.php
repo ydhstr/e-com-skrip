@@ -38,6 +38,7 @@ Route::group([
                 'reviews' => ReviewController::class,
                 'orders' => OrderController::class,
                 'payments' => PaymentController::class,
+                'refunds' => RefundController::class,
             ]);
 
             Route::get('pesanan/baru', [OrderController::class, 'baru']);

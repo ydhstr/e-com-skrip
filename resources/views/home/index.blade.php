@@ -2,7 +2,7 @@
 
 @section('content')
 <!-- Hero Slider -->
-<section class="hero-wrap text-center relative" style="height: 500px;">
+<section class="hero-wrap text-center relative">
     <div id="owl-hero" class="owl-carousel owl-theme light-arrows slider-animated">
         @foreach ($sliders as $slider)
         <div class="hero-slide overlay" style="background-image:url(/uploads/{{$slider->gambar}})">
@@ -12,8 +12,8 @@
                         <h1 class="hero-title nocaps">{{$slider->nama_slider}}</h1>
                         <h2 class="hero-subtitle lines">{{$slider->deskripsi}}</h2>
                     </div>
-                </div> -->
-            </div>
+                </div>
+            </div> -->
         </div>
         @endforeach
     </div>
@@ -21,7 +21,7 @@
 <!-- end hero slider -->
 
 <!-- Promo Banners -->
-<section class="section-wrap promo-banners pb-20">
+<section class="pt-40 pb-20">
     <div class="container">
     <div class="row heading-row">
             <div class="col-md-12 text-center">
@@ -33,7 +33,11 @@
         <div class="row">
             @foreach ($categories as $category)
             <div class="col-xs-4 col-xxs-12 mb-30 promo-banner">
-                <a href="/front/#">
+            @php
+                $subcategories = App\Models\Subcategory::where('id_kategori',$category->id)->get();
+            @endphp
+                @foreach ($subcategories as $subcategory)
+                <a href="/products/{{$subcategory->id}}">
                     <img src="/uploads/{{$category->gambar}}" alt="">
                     <div class="overlay"></div>
                     <div class="promo-inner valign">
@@ -43,10 +47,10 @@
                 </a>
             </div>
             @endforeach
+            @endforeach
         </div>
     </div>
 </section> <!-- end promo banners -->
-
 
 <!-- Trendy Products -->
 <section class="section-wrap-sm new-arrivals pb-50">
@@ -116,8 +120,8 @@
 </section> <!-- end trendy products -->
 
 <!-- Testimonials -->
-<section class="section-wrap relative testimonials bg-parallax overlay"
-    style="background-image:url(/front/img/testimonials/testimonial_bg.jpg);">
+<section class="section-wrap testimonials"
+    style="background-image:url(/uploads/testimonialbg1.jpg);">
     <div class="container relative">
 
         <div class="row heading-row mb-20">

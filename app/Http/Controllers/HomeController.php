@@ -10,10 +10,12 @@ use App\Models\Payment;
 use App\Models\Product;
 use App\Models\Slider;
 use App\Models\Testimoni;
+use App\Models\Refund;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Validator;
 
 class HomeController extends Controller
 {
@@ -28,8 +30,8 @@ class HomeController extends Controller
     }
 
     public function products($id_subcategory)
-    {
-        $products = Product::where('id_subkategori', $id_subcategory)->get();
+    {   
+        $products = Product::where('id_subkategori', $id_subcategory)->paginate(12);
 
         return view('home.products', compact('products'));
     }
@@ -46,6 +48,7 @@ class HomeController extends Controller
         return redirect('/cart');
     }
 
+    
     public function product($id_product)
     {
         $product = Product::find($id_product);
@@ -224,6 +227,7 @@ class HomeController extends Controller
             'status' => 'MENUNGGU',
             'no_rekening' => $request->no_rekening,
             'atas_nama' => $request->atas_nama,
+            'payment' => $request->payment
         ]);
 
         return redirect('/orders');
@@ -239,6 +243,13 @@ class HomeController extends Controller
     public function pesanan_selesai(Order $order)
     {
         $order->status = 'Selesai';
+        $order->save();
+
+        return redirect('/orders');
+    }
+    public function pesanan_refund(Order $order)
+    {
+        $order->status = 'Refund';
         $order->save();
 
         return redirect('/orders');
@@ -264,13 +275,83 @@ class HomeController extends Controller
         return view('home.faq');
     }
     
-    public function profile()
-    {
-        return view('profile.profile');
-    }
-
     public function profileikm()
     {
         return view('profile.profileikm');
     }
+    public function penilaian()
+    {
+        $about = About::first();
+        return view('home.penilaian', compact('about'));
+    }
+    public function testimoni(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'nama_testimoni' => 'required',
+            'deskripsi' => 'required',
+            'gambar' => 'required|image|mimes:jpg,png,jpeg,webp'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(
+                $validator->errors(),
+                422
+            );
+        }
+
+        $input = $request->all();
+
+        if ($request->has('gambar')) {
+            $gambar = $request->file('gambar');
+            $nama_gambar = time() . rand(1, 9) . '.' . $gambar->getClientOriginalExtension();
+            $gambar->move('uploads', $nama_gambar);
+            $input['gambar'] = $nama_gambar;
+        }
+
+        $Testimoni = Testimoni::create($input);
+        return redirect('/penilaian');
+    }
+
+    public function keluhan(Request $request)
+{ 
+    if (!Auth::guard('webmember')->check()) {
+        return redirect('/login_member');
+    }
+
+    $validator = Validator::make($request->all(), [
+        'id_member' => 'required',
+        'id_order' => 'required',
+        'deskripsi' => 'required',
+        'gambar' => 'required|image|mimes:jpg,png,jpeg,webp'
+    ]);
+
+    if ($validator->fails()) {
+        return response()->json(
+            $validator->errors(),
+            422
+        );
+    }
+
+    $input = $request->except('gambar');
+
+    if ($request->hasFile('gambar')) {
+        $gambar = $request->file('gambar');
+        $nama_gambar = time() . rand(1, 9) . '.' . $gambar->getClientOriginalExtension();
+        $gambar->move('uploads', $nama_gambar);
+        $input['gambar'] = $nama_gambar;
+    }
+
+    $refund = Refund::create($input);
+    return redirect('/refund');
+}
+
+    
+    public function refund()
+    {
+        $about = About::first();
+        $orders = Order::all();
+        return view('home.laporan', compact('about','orders'));
+    }
+
+    
 }

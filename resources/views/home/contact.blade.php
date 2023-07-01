@@ -49,7 +49,4 @@
         </div>
     </div>
 </section> <!-- end contact -->
-
-<!-- Google Map -->
-<div id="google-map" class="gmap" data-address="V Tytana St, Manila, Philippines"></div>
 @endsection

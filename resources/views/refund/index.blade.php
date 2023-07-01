@@ -1,28 +1,27 @@
 @extends('layout.app')
 
-@section('title', 'Data Pembayaran')
+@section('title', 'Data Refund')
 
 @section('content')
 <div class="card shadow">
     <div class="card-header">
         <h4 class="card-title">
-            Data Pembayaran
+            Data Refund
         </h4>
     </div>
     <div class="card-body">
+        <div class="d-flex justify-content-end mb-4">
+            <a href="#modal-form" data-toggle="modal" class="btn btn-primary modal-tambah">Tambah Data</a>
+        </div>
         <div class="table-responsive">
             <table class="table table-bordered table-hover table-striped">
                 <thead>
                     <tr>
                         <th>Aksi</th>
                         <th>No</th>
-                        <th>Tanggal</th>
-                        <th>Order</th>
-                        <th>Jumlah</th>
-                        <th>No Rekening</th>
-                        <th>Atas Nama</th>
-                        <th>Status</th>
-                        <th>Payment</th>
+                        <th>Nama Refund</th>
+                        <th>Deskripsi</th>
+                        <th>Gambar</th>
                     </tr>
                 </thead>
                 <tbody></tbody>
@@ -35,7 +34,7 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Form Pembayaran</h5>
+                <h5 class="modal-title">Form Refund</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -43,37 +42,37 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="col-md-12">
-                        <form class="form-Pembayaran">
+                        <form action="{{ route('refund.store') }}" class="form-Refund" method="POST" enctype="multipart/form-data">
+                        @csrf
                             <div class="form-group">
-                                <label for="">Tanggal</label>
-                                <input type="text" class="form-control" name="tanggal" placeholder="Tanggal" readonly>
+                                <label for="">ID Member</label>
+                                <input value="{{ old('id_member') }}" type="text" class="form-control" name="id_member" placeholder="Nama Refund"
+                                    required>
                             </div>
                             <div class="form-group">
-                                <label for="">Jumlah</label>
-                                <input type="text" class="form-control" name="jumlah" placeholder="Jumlah" readonly>
+                                <label for="">ID Order</label>
+                                <input value="{{ old('id_order') }}" type="text" class="form-control" name="id_order" placeholder="id order"
+                                    required>
                             </div>
-                            <div class="form-group">
-                                <label for="">No Rekening</label>
-                                <input type="text" class="form-control" name="no_rekening" placeholder="No Rekening"
-                                    readonly>
+                            <div value="{{ old('deskripsi') }}"
+                            class="form-group">
+                                <label for="">Deskripsi</label>
+                                <textarea name="deskripsi" placeholder="Deskripsi" class="form-control" id="" cols="30"
+                                    rows="10" required></textarea>
                             </div>
-                            <div class="form-group">
-                                <label for="">Atas Nama</label>
-                                <input type="text" class="form-control" name="atas_nama" placeholder="Atas Nama"
-                                    readonly>
-                            </div>
-                            <div class="form-group">
-                                <label for="">Status</label>
-                                <select name="status" id="status" class="form-control">
-                                    <option value="DITERIMA">DITERIMA</option>
-                                    <option value="DITOLAK">DITOLAK</option>
-                                    <option value="COD">CASH ON DELIVERY</option>
-                                    <option value="MENUNGGU">MENUNGGU</option>
-                                </select>
+                            <div value="{{ old('gambar') }}" class="form-group">
+                                <label for="">Gambar</label>
+                                <input type="file" class="form-control" name="gambar">
                             </div>
                             <div class="form-group">
                                 <button type="submit" class="btn btn-primary btn-block">Submit</button>
                             </div>
+                           <!--  @if ($message = Session::get('success'))
+      <div class="alert alert-success alert-block">
+        <button type="button" class="close" data-dismiss="alert">×</button>	
+          <strong>{{ $message }}</strong>
+      </div>
+                            @endif -->
                         </form>
                     </div>
                 </div>
@@ -87,35 +86,28 @@
 
 @endsection
 
-
 @push('js')
 <script>
     $(function() {
         $.ajax({
-            url: '/api/payments',
+            url: '/api/refunds',
             success: function({
                 data
             }) {
 
                 let row;
                 data.map(function(val, index) {
-                    tgl = new Date(val.created_at)
-                    tgl.setMonth(tgl.getMonth() + 1);
-                    tgl_lengkap = `${tgl.getDate()}-${tgl.getMonth()}-${tgl.getFullYear()}`
                     row += `
                         <tr>
-                            <td>
+                            <td width="150px">
                                 <a href="#modal-form" data-id="${val.id}" class="btn btn-warning modal-ubah">Edit</a>
+                                <a href="#" data-id="${val.id}" class="btn btn-danger btn-hapus">hapus</a>
                             </td>
                             <td>${index+1}</td>
-                            <td>${tgl_lengkap}</td>
+                            <td>${val.id_member}</td>
                             <td>${val.id_order}</td>
-                            <td>${val.jumlah}</td>
-                            <td>${val.no_rekening}</td>
-                            <td>${val.atas_nama}</td>
-                            <td>${val.status}</td>
-                            <td>${val.payment}</td>
-
+                            <td>${val.deskripsi}</td>
+                            <td width="200px"><img src="/uploads/${val.gambar}" width="150"></td>
                         </tr>
                         `;
                 });
@@ -132,7 +124,7 @@
 
             if (confirm_dialog) {
                 $.ajax({
-                    url: '/api/payments/' + id,
+                    url: '/api/refunds/' + id,
                     type: "DELETE",
                     headers: {
                         "Authorization": 'Bearer ' + token
@@ -148,38 +140,59 @@
 
 
         });
-
-        function date(date) {
-        var date = new Date(date);
-        var day = date.getDate(); //Date of the month: 2 in our example
-        var month = date.getMonth(); //Month of the Year: 0-based index, so 1 in our example
-        var year = date.getFullYear()
-
-        return `${day}-${month}-${year}`;
-        }
-
-        $(document).on('click', '.modal-ubah', function() {
+/* 
+        $('.modal-tambah').click(function() {
             $('#modal-form').modal('show')
-            const id = $(this).data('id');
+            $('input[name="nama_Refund"]').val('')
+            $('textarea[name="deskripsi"]').val('')
 
-            $.get('/api/payments/' + id, function({
-                data
-            }) {
-                $('input[name="tanggal"]').val(date(data.created_at));
-                $('input[name="jumlah"]').val(data.jumlah);
-                $('input[name="no_rekening"]').val(data.no_rekening);
-                $('input[name="atas_nama"]').val(data.atas_nama);
-                $('select[name="status"]').val(data.status);
-                $('select[name="payment"]').val(data.payment);
-            });
-
-            $('.form-Pembayaran').submit(function(e) {
+            $('.form-Refund').submit(function(e) {
                 e.preventDefault()
                 const token = localStorage.getItem('token')
                 const frmdata = new FormData(this);
 
                 $.ajax({
-                    url: `api/payments/${id}?_method=PUT`,
+                    url: 'api/refunds',
+                    type: 'POST',
+                    data: frmdata,
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    headers: {
+                        "Authorization": 'Bearer ' + token
+                    },
+                    success: function(data) {
+                        if (data.success) {
+                            alert('Data berhasil ditambah')
+                            location.reload();
+                        }
+                    },
+                    fail : function(data){
+                        console.log(data)
+                    }
+                })
+            });
+        });
+ */
+        $(document).on('click', '.modal-ubah', function() {
+            $('#modal-form').modal('show')
+            const id = $(this).data('id');
+
+            $.get('/api/refunds/' + id, function({
+                data
+            }) {
+                $('input[name="id_member"]').val(data.id_member);
+                $('input[name="id_order"]').val(data.id_order);
+                $('textarea[name="deskripsi"]').val(data.deskripsi);
+            });
+
+            $('.form-Refund').submit(function(e) {
+                e.preventDefault()
+                const token = localStorage.getItem('token')
+                const frmdata = new FormData(this);
+
+                $.ajax({
+                    url: `api/refunds/${id}?_method=PUT`,
                     type: 'POST',
                     data: frmdata,
                     cache: false,
@@ -194,9 +207,9 @@
                             location.reload();
                         }
                     },
-                    fail : function(data){
+                   /*  fail : function(data){
                         console.log(data)
-                    }
+                    } */
                 })
             });
 

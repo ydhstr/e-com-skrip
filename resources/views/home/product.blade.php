@@ -11,7 +11,7 @@
 
             <div class="col-md-6 col-xs-12 product-slider mb-60">
 
-                <div class="flickity flickity-slider-wrap mfp-hover" id="gallery-main">
+                <div class="flickity flickity mfp-hover" id="gallery-main">
 
                     <div class="gallery-cell">
                         <a href="/uploads/{{$product->gambar}}" class="lightbox-img">
@@ -19,7 +19,7 @@
                             <i class="ui-zoom zoom-icon"></i>
                         </a>
                     </div>
-                    <div class="gallery-cell">
+                   <!--  <div class="gallery-cell">
                         <a href="/uploads/{{$product->gambar}}" class="lightbox-img">
                             <img src="/uploads/{{$product->gambar}}" alt="" />
                             <i class="ui-zoom zoom-icon"></i>
@@ -42,10 +42,10 @@
                             <img src="/uploads/{{$product->gambar}}" alt="" />
                             <i class="ui-zoom zoom-icon"></i>
                         </a>
-                    </div>
+                    </div> -->
                 </div> <!-- end gallery main -->
 
-                <div class="gallery-thumbs">
+               <!--  <div class="gallery-thumbs">
                     <div class="gallery-cell">
                         <img src="/uploads/{{$product->gambar}}" alt="" />
                     </div>
@@ -61,7 +61,7 @@
                     <div class="gallery-cell">
                         <img src="/uploads/{{$product->gambar}}" alt="" />
                     </div>
-                </div> <!-- end gallery thumbs -->
+                </div>  --><!-- end gallery thumbs -->
 
             </div> <!-- end col img slider -->
 
@@ -95,7 +95,7 @@
                        <span class="amount">Rp. {{number_format($product->harga - $product->diskon)}}</span>
                  </ins>
                   @else
-                       <span>Rp. {{number_format($product->harga)}}</span>
+                  <ins><span>Rp. {{number_format($product->harga)}}</span></ins>
                 @endif
                 </span>
                 <p class="short-description">{{$product->deskripsi}}</p>
@@ -139,7 +139,7 @@
                             </a>
                         </div>
                     </div>
-                    <a href="/login_member" class="btn btn-dark btn-lg add-to-cart"><span>Add to Cart</span></a>
+                    <a href="{{ Auth::guard('webmember')->check() ? '/cart' : '/login_member' }}" class="btn btn-dark btn-lg add-to-cart"><span>Add to Cart</span></a>
                     <a href="#" class="product-add-to-wishlist"><i class="fa fa-heart"></i></a>
                 </div>
 
@@ -194,7 +194,7 @@
                     </div>
                 </div>
 
-                <div class="socials-share clearfix">
+               <!--  <div class="socials-share clearfix">
                     <span>Share:</span>
                     <div class="social-icons nobase">
                         <a href="#"><i class="fa fa-twitter"></i></a>
@@ -202,7 +202,7 @@
                         <a href="#"><i class="fa fa-google"></i></a>
                         <a href="#"><i class="fa fa-instagram"></i></a>
                     </div>
-                </div>
+                </div> -->
             </div> <!-- end col product description -->
         </div> <!-- end row -->
 
@@ -253,10 +253,18 @@
                                     href="/products/{{$produk->id_subkategori}}">{{$produk->subcategory->nama_subkategori}}</a>
                             </span>
                         </div>
-                        <span class="price">
-                            <ins>
-                                <span class="amount">Rp. {{number_format($produk->harga)}}</span>
-                            </ins>
+                                <span class="price">
+                @if ($produk->diskon)
+                  <del>
+                      <span>Rp. {{number_format($produk->harga)}}</span>
+                  </del>
+                <ins>
+                       <span class="amount">Rp. {{number_format($produk->harga - $produk->diskon)}}</span>
+                 </ins>
+                  @else
+                  <ins><span>Rp. {{number_format($produk->harga)}}</span></ins>
+                @endif
+                </span>
                         </span>
                     </div>
                 </div>
@@ -277,7 +285,9 @@
             var jumlah = $('.jumlah').val();
             var size = $('.size').val();
             var color = $('.color').val();
-            var total = {{$product->harga}} * jumlah;
+            var harga = {{$product->harga}};
+            var diskon = {{$product->diskon}};
+            var total = (harga - diskon) * jumlah;
             var is_checkout = 0;
 
             @auth('webmember')

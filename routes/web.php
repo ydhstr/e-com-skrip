@@ -13,6 +13,7 @@ use App\Http\Controllers\SliderController;
 use App\Http\Controllers\SubcategoryController;
 use App\Http\Controllers\TentangController;
 use App\Http\Controllers\TestimoniController;
+use App\Http\Controllers\RefundController;
 use Illuminate\Support\Facades\Route;
 
 // auth
@@ -34,6 +35,7 @@ Route::get('/slider', [SliderController::class, 'list']);
 Route::get('/barang', [ProductController::class, 'list']);
 Route::get('/testimoni', [TestimoniController::class, 'list']);
 Route::get('/review', [ReviewController::class, 'list']);
+Route::get('/pengembalian', [RefundController::class, 'list']);
 Route::get('/payment', [PaymentController::class, 'list']);
 
 Route::get('/pesanan/baru', [OrderController::class, 'list']);
@@ -49,7 +51,8 @@ Route::get('/laporan/penjualan', [ReportController::class, 'penjualan_list']);
 Route::get('/laporan/pembayaran', [ReportController::class, 'pembayaran_list']);
 Route::get('/laporan/orderselesai', [ReportController::class, 'orderselesai_list']);
 Route::get('/laporan/barangdiminati', [ReportController::class, 'barangdiminati_list']);
-Route::get('/laporan/codreport', [ReportController::class, 'codreports_list']);
+Route::get('/laporan/codreport', [ReportController::class, 'codreport_list']);
+Route::get('/laporan/refund', [ReportController::class, 'orderrefund_list']);
 
 Route::get('/tentang', [TentangController::class, 'index']);
 Route::post('/tentang/{about}', [TentangController::class, 'update']);
@@ -66,7 +69,8 @@ Route::get('/orders', [HomeController::class, 'orders']);
 Route::get('/about', [HomeController::class, 'about']);
 Route::get('/contact', [HomeController::class, 'contact']);
 Route::get('/faq', [HomeController::class, 'faq']);
-Route::get('/profile', [HomeController::class, 'profile']);
+Route::get('/penilaian', [HomeController::class, 'penilaian']);
+Route::get('/refund', [HomeController::class, 'refund']);
 Route::get('/profileikm', [HomeController::class, 'profileikm']);
 
 Route::post('/add_to_cart', [HomeController::class, 'add_to_cart']);
@@ -76,6 +80,8 @@ Route::get('/get_ongkir/{destination}/{weight}', [HomeController::class, 'get_on
 Route::post('/checkout_orders', [HomeController::class, 'checkout_orders']);
 Route::post('/payments', [HomeController::class, 'payments']);
 Route::post('/pesanan_selesai/{order}', [HomeController::class, 'pesanan_selesai']);
-
+Route::post('/pesanan_refund/{order}', [HomeController::class, 'pesanan_refund']);
+Route::post('/testimoni', [HomeController::class, 'testimoni']);
+Route::post('/keluhan', [HomeController::class, 'keluhan']);
 //laporan pdf
-Route::get('/laporan/pdf', [ReportController::class, 'pdf1']);
+Route::get('/laporan/pdf', [ReportController::class, 'pdf1'])->name('pdf1');

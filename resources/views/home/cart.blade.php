@@ -41,7 +41,11 @@
                                         </ul>
                                     </td>
                                     <td class="product-price">
-                                        <span class="amount">{{ "Rp. " . number_format($cart->product->harga)}}</span>
+                                    @if ($cart->product->diskon)
+                                    <span class="amount">Rp. {{number_format($cart->product->harga - $cart->product->diskon)}}</span>
+                                    @else
+                                    <span>Rp. {{number_format($cart->product->harga)}}</span>
+                                    @endif
                                     </td>
                                     <td class="product-quantity">
                                         <span class="amount">{{ $cart->jumlah }}</span>

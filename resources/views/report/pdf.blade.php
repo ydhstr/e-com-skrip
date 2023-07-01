@@ -16,12 +16,13 @@
     </style>
     <center>
         <h5>Laporan Data Pesanan</h5>
-        <h6>{{ request()->input('dari') }} - {{ request()->input('sampai') }}</h6>
+        <h6><p>Dari: {{ $dari }} - Sampai: {{ $sampai }}</p></h6>
     </center>
 
     <br>
-
-    <table class='table table-bordered'>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover table-striped">
         <thead>
             <tr>
                 <th>No</th>
@@ -32,21 +33,17 @@
                 <th>Pendapatan</th>
             </tr>
         </thead>
-        <tbody>
-        @forelse ($reports as $index => $data)
-        <tr>
-            <td>{{ $index + 1 }}</td>
-            <td>{{ $data->nama_barang }}</td>
-            <td>{{ $data->harga }}</td>
-            <td>{{ $data->jumlah_dibeli }}</td>
-            <td>{{ $data->total_qty }}</td>
-            <td>{{ $data->pendapatan }}</td>
-        </tr>
-    @empty
-        <tr>
-            <td class="text-center" colspan="6">Tidak ada data untuk ditampilkan</td>
-        </tr>
-    @endforelse
+        <tbody>  
+            @foreach ($report as $item)
+            <tr>
+                <td class="border px-6 py-4">{{ $loop->iteration }}</td>
+            </tr>
+            @endforeach
         </tbody>
     </table>
+    <!-- <script>
+        window.onload = function() {
+            window.print();
+        };
+    </script> -->
     </html>

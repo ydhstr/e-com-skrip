@@ -8,31 +8,31 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-8 mb-50">
-                <h2 class="intro-heading">about our shop</h2>
+                <h2 class="intro-heading">Mengenai SAHABAT IKM</h2>
                 <p>{{$about->deskripsi}}</p>
             </div>
-            <div class="col-sm-3 col-sm-offset-1">
+            <!-- <div class="col-sm-3 col-sm-offset-1">
                 <span class="result">10</span>
                 <p>Years on Global Market.</p>
                 <span class="result">45</span>
                 <p>Partners are Working With Us.</p>
-            </div>
+            </div> -->
         </div>
         <hr class="mb-0">
     </div>
 </section> <!-- end intro -->
 
 <!-- Promo Section -->
-<section class="section-wrap promo-bg" style="background-image:url(/front/img/promo_2_bg.jpg);">
-    <div class="container text-center">
+<section class="section-wrap promo-bg" style="background-image:url(/uploads/IMG_9886.jpg);">
+   <!--  <div class="container text-center">
         <div class="table-box">
             <h2 class="heading-frame white">The best ideas</h2>
         </div>
-    </div>
+    </div> -->
 </section> <!-- end promo section -->
 
 <!-- Testimonials -->
-<section class="section-wrap testimonials">
+<!-- <section class="section-wrap testimonials">
     <div class="container">
 
         <div class="row heading-row mb-20">
@@ -54,5 +54,5 @@
         </div>
     </div>
 
-</section> <!-- end testimonials -->
+</section>  --><!-- end testimonials -->
 @endsection

@@ -10,8 +10,8 @@ class ReportController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth')->only(['index, penjualan_list, pembayaran_list, orderselesai_list, barangdiminati_list,codreports_list , pdf1']);
-        $this->middleware('auth:api')->only(['get_reports, penjualan, pembayaran, orderselesai, barangdiminati,pembayarancod']);
+        $this->middleware('auth')->only(['index, penjualan_list, pembayaran_list, orderselesai_list, barangdiminati_list,codreport_list, pdf1, orderrefund_list']);
+        $this->middleware('auth:api')->only(['get_reports, penjualan, pembayaran, orderselesai, barangdiminati,pembayarancod,pdf1']);
     }
 
     public function index()
@@ -32,7 +32,11 @@ class ReportController extends Controller
     {
         return view('report.orderselesai');
     }
-    public function codreports_list()
+    public function orderrefund_list()
+    {
+        return view('report.refund');
+    }
+    public function codreport_list()
     {
         return view('report.codreport');
     }
@@ -40,7 +44,6 @@ class ReportController extends Controller
     {
         return view('report.barangdiminati');
     }
-    
    /*  public function get_reports(Request $request)
     {
         $report = DB::table('order_details')
@@ -59,39 +62,12 @@ class ReportController extends Controller
         return response()->json([
             'data' => $report
         ]);
-        
     } */
-    public function pdf1(Request $request)
-    {
-        // Retrieve the data from the get_reports method
-        $reports = $this->get_reports($request);
-      
-        // Check if the data exists
-    if (!empty($reports)) {
-        $reportData = $reports->getData()->data;
 
-        // Generate PDF using Laravel's built-in feature
-        $pdf = PDF::loadView('report.pdf', ['reports' => $reportData]);
-
-        // Optional: Set PDF filename
-        $filename = 'report.pdf';
-
-        // Optional: Set PDF output options (e.g., download, save, etc.)
-        $options = [
-            'attachment' => true,
-        ];
-      
-            // Output PDF to the browser or save to a file
-            return $pdf->download($filename, $options);
-        } else {
-            return response()->json(['message' => 'No data available for the report.'], 404);
-        }
-    }
     
-
 public function get_reports(Request $request)
 {
-    $report = DB::table('order_details')
+    /* $report = DB::table('order_details')
         ->join('products', 'products.id', '=', 'order_details.id_produk')
         ->select(DB::raw('
             nama_barang,
@@ -102,12 +78,32 @@ public function get_reports(Request $request)
         ->whereRaw("date(order_details.created_at) >= ?", [$request->dari])
         ->whereRaw("date(order_details.created_at) <= ?", [$request->sampai])
         ->groupBy('id_produk', 'nama_barang', 'harga')
-        ->get();
-        
+        ->get(); */
+
+        $report = DB::table('order_details')
+    ->join('products', 'products.id', '=', 'order_details.id_produk')
+    ->select(DB::raw('
+        nama_barang,
+        count(*) as jumlah_dibeli,
+        harga,
+        SUM(total) as pendapatan,
+        SUM(jumlah) as total_qty'))
+    ->whereRaw("DATE(order_details.created_at) BETWEEN ? AND ?", [$request->dari, $request->sampai])
+    ->groupBy('id_produk', 'nama_barang', 'harga')
+    ->get();
+
         return response()->json([
             'data' => $report
         ]);
 }
+public function pdf1(Request $request)
+    {
+        $dari = $request->dari;
+        $sampai = $request->sampai;
+        $report = $this->get_reports($request);
+        dd($report);
+    return view('report.pdf', ['report' => $report, 'dari' => $dari, 'sampai' => $sampai]);
+    }
 
     public function penjualan(Request $request)
     {
@@ -122,7 +118,7 @@ public function get_reports(Request $request)
             ->whereRaw("date(order_details.created_at) <=' $request->sampai'")
             ->groupBy('id_produk', 'nama_barang', 'harga')
             ->get();
-
+            
         return response()->json([
             'data' => $report
         ]);
