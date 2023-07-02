@@ -21,6 +21,13 @@ Route::get('login', [AuthController::class, 'index'])->name('login');
 Route::post('login', [AuthController::class, 'login']);
 Route::get('logout', [AuthController::class, 'logout']);
 
+Route::get('login_store', [AuthController::class, 'login_store']);
+Route::post('login_store', [AuthController::class, 'login_store_action']);
+Route::get('logout_store', [AuthController::class, 'logout_store']);
+
+Route::get('register_store', [AuthController::class, 'register_store']);
+Route::post('register_store', [AuthController::class, 'register_store_action']);
+
 Route::get('login_member', [AuthController::class, 'login_member']);
 Route::post('login_member', [AuthController::class, 'login_member_action']);
 Route::get('logout_member', [AuthController::class, 'logout_member']);
@@ -71,7 +78,7 @@ Route::get('/contact', [HomeController::class, 'contact']);
 Route::get('/faq', [HomeController::class, 'faq']);
 Route::get('/penilaian', [HomeController::class, 'penilaian']);
 Route::get('/refund', [HomeController::class, 'refund']);
-Route::get('/profileikm', [HomeController::class, 'profileikm']);
+Route::get('/store', [HomeController::class, 'store']);
 
 Route::post('/add_to_cart', [HomeController::class, 'add_to_cart']);
 Route::get('/delete_from_cart/{cart}', [HomeController::class, 'delete_from_cart']);
@@ -83,5 +90,7 @@ Route::post('/pesanan_selesai/{order}', [HomeController::class, 'pesanan_selesai
 Route::post('/pesanan_refund/{order}', [HomeController::class, 'pesanan_refund']);
 Route::post('/testimoni', [HomeController::class, 'testimoni']);
 Route::post('/keluhan', [HomeController::class, 'keluhan']);
+Route::post('/aduan', [HomeController::class, 'aduan']);
+
 //laporan pdf
 Route::get('/laporan/pdf', [ReportController::class, 'pdf1'])->name('pdf1');

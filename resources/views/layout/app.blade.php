@@ -56,12 +56,19 @@
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
+                        @if (Auth::guard('web')->user())
                         <a class="collapse-item" href="/kategori">Data Kategori</a>
                         <a class="collapse-item" href="/subkategori">Data Subkategori</a>
                         <a class="collapse-item" href="/slider">Data Slider</a>
+                        @endif
                         <a class="collapse-item" href="/barang">Data Barang</a>
+                        @if (Auth::guard('web')->user())
                         <a class="collapse-item" href="/testimoni">Data Testimoni</a>
+                        @endif
                         <a class="collapse-item" href="/pengembalian">Data Refund</a>
+                        @if (Auth::guard('web')->user())
+                        <a class="collapse-item" href="/#">Data Aduan</a>
+                        @endif
                     </div>
                 </div>
             </li>
@@ -83,11 +90,14 @@
                     </div>
                 </div>
             </li>
+            @if (Auth::guard('web')->user())
             <li class="nav-item">
                 <a class="nav-link" href="/payment">
                     <i class="fas fa-fw fa-credit-card"></i>
                     <span>Pembayaran</span></a>
             </li>
+            @endif
+            @if (Auth::guard('web')->user())
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#laporan"
                     aria-expanded="true" aria-controls="laporan">
@@ -111,6 +121,7 @@
                     <i class="fas fa-fw fa-globe"></i>
                     <span>Tentang</span></a>
             </li>
+            @endif
             <li class="nav-item">
                 <a class="nav-link" href="/logout">
                     <i class="fas fa-fw fa-sign-out-alt"></i>
@@ -142,22 +153,27 @@
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Admin</span>
-                                <img class="img-profile rounded-circle" src="/sbadmin2/img/undraw_profile.svg">
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                               <span class="mr-2 d-none d-lg-inline text-gray-600 small">
+                                   @if (Auth::guard('webstore')->check())
+                                       {{ Auth::guard('webstore')->user()->nama_store }}
+                                   @elseif (Auth::guard('web')->check())
+                                       {{ Auth::guard('web')->user()->name }}
+                                   @endif
+                               </span>
+                               <img class="img-profile rounded-circle" src="/sbadmin2/img/undraw_profile.svg"
+                                    alt="Profile Picture">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                 aria-labelledby="userDropdown">
+                                <a class="dropdown-item" href="/logout">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Logout
                                 </a>
                             </div>
                         </li>
-
                     </ul>
-
                 </nav>
                 <!-- End of Topbar -->
 

@@ -86,7 +86,7 @@
                                     <div class="nav-cart-outer">
                                         <div class="nav-cart-inner">
                                             <a href="/cart" class="nav-cart-icon">
-                                                <span class="nav-cart-badge">2</span>
+                                                <span class="nav-cart-badge"></span>
                                             </a>
                                         </div>
                                     </div>
@@ -109,17 +109,8 @@
                                         @php
                                         $categories = App\Models\Category::all();
                                         @endphp
-                                        @foreach ($categories as $category)
                                         <li class="dropdown">
-                                        @php
-                                                                    $subcategories =
-                                                                    App\Models\Subcategory::where('id_kategori',
-                                                                    $category->id)->get();
-                                                                    @endphp
-                                                                    @foreach ($subcategories as $subcategory)
-                                            <a href="/products/{{$subcategory->id}}">Produk</a>
-                                            @endforeach
-                                            @endforeach
+                                            <a>Produk</a>
                                             <i class="fa fa-angle-down dropdown-trigger"></i>
                                             <ul class="dropdown-menu megamenu-wide">
                                                 <li>
@@ -150,11 +141,27 @@
                                                 </li>
                                             </ul>
                                         </li>
-
-                                        <li class="dropdown">
-                                            <a href="/#">Store</a>
-                                        </li>
-
+                                        {{-- <li class="dropdown">
+                                            <a href="/store">Store</a>
+                                            <i class="fa fa-angle-down dropdown-trigger"></i>
+                                            <ul class="dropdown-menu megamenu-wide">
+                                                <li>
+                                                    <div class="megamenu-wrap container">
+                                                        <div class="row">
+                                                            @foreach ($stores as $store)
+                                                            <div class="col-md-3 megamenu-item">
+                                                                <ul class="menu-list">
+                                                                    <li>
+                                                                        <span><a href="/products/{{$store->id}}">{{$store->nama_store}}</a></span>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                            @endforeach
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </li> --}}
                                         <li class="dropdown">
                                             <a href="/faq">F.A.Q</a>
                                         </li>
@@ -181,7 +188,7 @@
                                 <ul>
                                     <li class="nav-register">
                                         @if (Auth::guard('webmember')->check())
-                                        <a href="/profile">{{Auth::guard('webmember')->user()->nama_member}} </a>
+                                        <a href="/#">{{Auth::guard('webmember')->user()->nama_member}} </a>
                                         @else
                                         <a href="/login_member">Login </a>
                                         @endif
@@ -249,13 +256,28 @@
                                 <div class="widget footer-links">
                                     <h5 class="widget-title bottom-line left-align grey">Account</h5>
                                     <ul class="list-no-dividers">
-                                        <li><a href="/profile">My account</a></li>
                                         <li><a href="/cart">Cart</a></li>
-                                        <li><a href="/orders">Order history</a></li>
+                                        <li><a href="/orders">Order History</a></li>
                                     </ul>
                                 </div>
                             </div>
-
+                            <div class="col-md-2 col-sm-6 col-xs-12">
+                                <div class="widget footer-links">
+                                    <h5 class="widget-title bottom-line left-align grey">Store</h5>
+                                    <ul class="list-no-dividers">
+                                        <li><a href="/login_store">Login</a></li>
+                                        <li><a href="/register_store">Register</a></li>
+                                        @if (Auth::guard('webstore')->check())
+                                        <a href="/#">{{Auth::guard('webstore')->user()->nama_store}} </a>
+                                        @endif
+                                        <li class="nav-register">
+                                            @if (Auth::guard('webstore')->check())
+                                            <a href="/logout_store">Logout</a>
+                                            @endif
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
                             <div class="col-md-2 col-sm-6 col-xs-12">
                                 <div class="widget footer-links">
                                     <h5 class="widget-title bottom-line left-align grey">Service</h5>

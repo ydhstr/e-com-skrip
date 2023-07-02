@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Member;
+use App\Models\Store;
 use GrahamCampbell\ResultType\Success;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -146,13 +147,121 @@ class AuthController extends Controller
 
     public function logout()
     {
-        Session::flush();
-        return redirect('/login');
+        if (Auth::guard('webstore')->check()){
+            Auth::guard('webstore')->logout();
+            Session::flush();
+            return redirect('/');
+        } elseif(Auth::guard('web')->check()){
+            Auth::guard('web')->logout();
+            Session::flush();
+            return redirect('/login');
+        }
     }
 
     public function logout_member()
     {
         Auth::guard('webmember')->logout();
+        Session::flush();
+        return redirect('/');
+    }
+
+    public function login_store()
+    {
+        return view('auth.login_store');
+    }
+    public function registers(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'nama_store' => 'required',
+            'alamat' => 'required',
+            'social_media' => 'required',
+            'online_store' => 'required',
+            'no_hp' => 'required',
+            'email' => 'required|email',
+            'password' => 'required|same:konfirmasi_password',
+            'konfirmasi_password' => 'required|same:password'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(
+                $validator->errors(),
+                422
+            );
+        }
+
+        $input = $request->all();
+        $input['password'] = bcrypt($request->password);
+        unset($input['konfirmasi_password']);
+        $Store = Store::create($input);
+
+        return response()->json([
+            'data' => $Store
+        ]);
+    }
+    public function login_store_action(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            Session::flash('errors', $validator->errors()->toArray());
+            return redirect('/login_store');
+        }
+
+        $credentials = $request->only('email', 'password');
+        $store = Store::where('email', $request->email)->first();
+
+        if ($store) {
+            if (Auth::guard('webstore')->attempt($credentials)) {
+                $request->session()->regenerate();
+                return redirect('/dashboard');
+            } else {
+                Session::flash('failed', "Password salah");
+                return redirect('/login_store');
+            }
+        } else {
+            Session::flash('failed', "Email Tidak ditemukan");
+            return redirect('/login_store');
+        }
+    }
+
+    public function register_store()
+    {
+        return view('auth.register_store');
+    }
+    
+    public function register_store_action(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'nama_store' => 'required',
+            'alamat' => 'required',
+            'social_media' => 'required',
+            'online_store' => 'required',
+            'no_hp' => 'required',
+            'email' => 'required|email',
+            'password' => 'required|same:konfirmasi_password',
+            'konfirmasi_password' => 'required|same:password'
+        ]);
+
+        if ($validator->fails()) {
+            Session::flash('errors', $validator->errors()->toArray());
+            return redirect('/register_store');
+        }
+
+        $input = $request->all();
+        $input['password'] = Hash::make($request->password);
+        unset($input['konfirmasi_password']);
+        Store::create($input);
+
+        Session::flash('success', 'Account successfully created!');
+        return redirect('/login_store');
+    }
+
+    public function logout_store()
+    {
+        Auth::guard('webstore')->logout();
         Session::flush();
         return redirect('/');
     }

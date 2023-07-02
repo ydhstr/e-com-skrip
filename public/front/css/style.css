@@ -2410,24 +2410,28 @@ input.main-search-input:-ms-input-placeholder {
 /*-------------------------------------------------------*/
 /* Testimonials
 /*-------------------------------------------------------*/
-.testimonials .testimonial-text {
+
+.testimonials {
+  height: 250px; 
+
+.testimonial-text {
   font-size: 22px;
-  color: #000;
+  color: #ffffff;
   line-height: 34px;
   margin-top: 20px;
   margin-bottom: 14px;
   font-weight: 400;
 }
 
-.testimonials .testimonial span {
+.testimonial span {
   font-size: 13px;
   color: #7f7f7f;
 }
 
-.testimonials .testimonial a {
+.testimonial a {
   color: #b79d82;
 }
-
+}
 .testimonials.bg-parallax {
   padding: 135px 0 115px;
   background-attachment: scroll;

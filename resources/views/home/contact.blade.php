@@ -4,25 +4,25 @@
 <!-- Contact -->
 <section class="section-wrap contact pb-40">
     <div class="container">
+    <h2 class="intro-heading">Aduan</h2>
         <div class="row">
 
             <div class="col-md-8 mb-40">
-                <form id="contact-form" action="#">
-
+                <form name="aduan" id="aduan" action="/aduan" method="POST">
+                    @csrf
                     <div class="contact-name">
-                        <input name="name" id="name" type="text" placeholder="Name*">
+                        <input name="nama" id="nama" type="text" placeholder="Name*">
                     </div>
                     <div class="contact-email">
-                        <input name="mail" id="mail" type="email" placeholder="E-mail*">
+                        <input name="email" id="email" type="email" placeholder="E-mail*">
                     </div>
                     <div class="contact-subject">
-                        <input name="subject" id="subject" type="text" placeholder="Subject">
+                        <input name="subjek" id="subjek" type="text" placeholder="Subject">
                     </div>
 
-                    <textarea name="comment" id="comment" placeholder="Message" rows="9"></textarea>
-                    <input type="submit" class="btn btn-lg btn-dark btn-submit" value="Send message"
-                        id="submit-message">
-                    <div id="msg" class="message"></div>
+                    <textarea name="deskripsi" id="deskripsi" placeholder="Message" rows="6"></textarea>
+
+                    <input type="submit" class="btn btn-lg btn-dark btn-submit" value="submit" id="">
                 </form>
             </div> <!-- end col -->
 

@@ -9,12 +9,12 @@ use Illuminate\Support\Facades\Validator;
 
 class CategoryController extends Controller
 {
-    /* public function __construct()
+    public function __construct()
     {
-        $this->middleware('auth')->only(['list']);
-        $this->middleware('auth:api')->only(['store', 'update', 'destroy']);
+        $this->middleware('auth:web')->only(['list']);
+        /* $this->middleware('auth:api')->only(['store', 'update', 'destroy']); */
     }
- */
+
     public function list()
     {
         return view('kategori.index');

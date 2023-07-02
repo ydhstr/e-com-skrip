@@ -48,6 +48,10 @@ return [
             'driver' => 'session',
             'provider' => 'members',
         ],
+        'webstore' => [
+            'driver' => 'session',
+            'provider' => 'stores',
+        ],
     ],
     /*
     |--------------------------------------------------------------------------
@@ -81,6 +85,11 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\Member::class,
         ],
+
+        'stores' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Store::class,
+        ]
     ],
 
     /*

@@ -37,13 +37,18 @@
             @foreach ($report as $item)
             <tr>
                 <td class="border px-6 py-4">{{ $loop->iteration }}</td>
+                <td class="border px-6 py-4">{{ $item->nama_barang }}</td>
+                <td class="border px-6 py-4">{{ $item->harga }}</td>
+                <td class="border px-6 py-4">{{ $item->jumlah_dibeli }}</td>
+                <td class="border px-6 py-4">{{ $item->total_qty }}</td>
+                <td class="border px-6 py-4">{{ $item->pendapatan }}</td>
             </tr>
             @endforeach
         </tbody>
     </table>
-    <!-- <script>
+    <script>
         window.onload = function() {
             window.print();
         };
-    </script> -->
+    </script> 
     </html>

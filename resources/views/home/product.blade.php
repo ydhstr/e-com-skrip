@@ -123,6 +123,10 @@
                     <label for="{{$size}}" style="margin-right: 20px">{{$size}}</label>
                     @endforeach
                 </div>
+                <div class="size-options clearfix mt-40">
+                    <span>Stok:</span>
+                    <label for="{{$product->stock}}" style="margin-right: 20px">{{$product->stock}}</label>
+                </div>
 
                 <div class="product-actions">
                     <span>Qty:</span>
@@ -140,7 +144,7 @@
                         </div>
                     </div>
                     <a href="{{ Auth::guard('webmember')->check() ? '/cart' : '/login_member' }}" class="btn btn-dark btn-lg add-to-cart"><span>Add to Cart</span></a>
-                    <a href="#" class="product-add-to-wishlist"><i class="fa fa-heart"></i></a>
+                    {{-- <a href="#" class="product-add-to-wishlist"><i class="fa fa-heart"></i></a> --}}
                 </div>
 
 
@@ -176,15 +180,15 @@
                                 <table class="table shop_attributes">
                                     <tbody>
                                         <tr>
-                                            <th>Size:</th>
+                                            <th>Ukuran:</th>
                                             <td>{{$product->ukuran}}</td>
                                         </tr>
                                         <tr>
-                                            <th>Colors:</th>
+                                            <th>Warna:</th>
                                             <td>{{$product->warna}}</td>
                                         </tr>
                                         <tr>
-                                            <th>Fabric:</th>
+                                            <th>Bahan:</th>
                                             <td>{{$product->bahan}}</td>
                                         </tr>
                                     </tbody>

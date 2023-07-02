@@ -126,7 +126,7 @@
 
         <div class="row heading-row mb-20">
             <div class="col-md-6 col-md-offset-3 text-center">
-                <h2 class="heading white bottom-line">Happy Clients</h2>
+                <h4 class="heading white bottom-line">Testimoni</h4>
             </div>
         </div>
 

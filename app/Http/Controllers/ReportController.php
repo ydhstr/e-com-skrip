@@ -10,7 +10,7 @@ class ReportController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth')->only(['index, penjualan_list, pembayaran_list, orderselesai_list, barangdiminati_list,codreport_list, pdf1, orderrefund_list']);
+        $this->middleware('auth:web')->only(['index, penjualan_list, pembayaran_list, orderselesai_list, barangdiminati_list,codreport_list, pdf1, orderrefund_list']);
         $this->middleware('auth:api')->only(['get_reports, penjualan, pembayaran, orderselesai, barangdiminati,pembayarancod,pdf1']);
     }
 
@@ -100,9 +100,9 @@ public function pdf1(Request $request)
     {
         $dari = $request->dari;
         $sampai = $request->sampai;
-        $report = $this->get_reports($request);
-        dd($report);
-    return view('report.pdf', ['report' => $report, 'dari' => $dari, 'sampai' => $sampai]);
+        $response = $this->get_reports($request);
+        $report = $response->getData()->data;
+    return view('report.pdf', compact('report', 'dari', 'sampai'));
     }
 
     public function penjualan(Request $request)

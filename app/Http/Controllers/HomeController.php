@@ -11,6 +11,8 @@ use App\Models\Product;
 use App\Models\Slider;
 use App\Models\Testimoni;
 use App\Models\Refund;
+use App\Models\Aduan;
+use App\Models\Store;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -23,6 +25,7 @@ class HomeController extends Controller
     {
         $sliders = Slider::all();
         $categories = Category::all();
+        /* $stores = Store::skip(0)->take(5)->get(); */
         $testimonies = Testimoni::all();
         $products = Product::skip(0)->take(8)->get();
 
@@ -234,7 +237,9 @@ class HomeController extends Controller
     }
 
     public function orders()
-    {
+    {   if (!Auth::guard('webmember')->user()) {
+        return redirect('/login_member');
+    }
         $orders = Order::where('id_member', Auth::guard('webmember')->user()->id)->get();
         $payments = Payment::where('id_member', Auth::guard('webmember')->user()->id)->get();
         return view('home.orders', compact('orders', 'payments'));
@@ -266,18 +271,24 @@ class HomeController extends Controller
     public function contact()
     {
         $about = About::first();
-
         return view('home.contact', compact('about'));
     }
-
+    
+    public function aduan(Request $request)
+    {   
+        $input = $request->all();
+        Aduan::create($input);
+        return redirect('/contact');
+    }
+    
     public function faq()
     {
         return view('home.faq');
     }
     
-    public function profileikm()
+    public function store()
     {
-        return view('profile.profileikm');
+        return view('home.store');
     }
     public function penilaian()
     {
