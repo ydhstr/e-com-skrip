@@ -42,13 +42,14 @@
                         <th>No Rekening</th>
                         <th>Atas Nama</th>
                         <th>Status</th>
+                        <th>Payment</th>
                     </tr>
                 </thead>
                 <tbody></tbody>
             </table>
             <div class="card-footer">
                 <div class="text-right">
-                    <a href="#" class="btn btn-danger btn-sm"
+                    <a href="{{ route('cod', ['dari' => request()->input('dari'), 'sampai' => request()->input('sampai')]) }}" class="btn btn-danger btn-sm"
                         id="export-pdf">
                         <i class="fa fa-file-pdf"></i> Export PDF
                     </a>
@@ -71,7 +72,7 @@
         const token = localStorage.getItem('token')
 
         $.ajax({
-            url: `/api/reports/pembayaran?dari=${dari}&sampai=${sampai}`,
+            url: `/api/reports/codreport?dari=${dari}&sampai=${sampai}`,
             headers: {
                 "Authorization": 'Bearer ' + token
             },
@@ -93,6 +94,7 @@
                             <td>${val.no_rekening}</td>
                             <td>${val.atas_nama}</td>
                             <td>${val.status}</td>
+                            <td>${val.payment}</td>
                         </tr>
                         `;
                 });

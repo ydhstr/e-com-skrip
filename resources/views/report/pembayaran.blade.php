@@ -1,12 +1,12 @@
 @extends('layout.app')
 
-@section('title', 'Laporan Pembayaran')
+@section('title', 'Laporan Pembayaran Transfer')
 
 @section('content')
 <div class="card shadow">
     <div class="card-header">
         <h4 class="card-title">
-            Laporan Pembayaran
+            Laporan Pembayaran Transfer
         </h4>
     </div>
     <div class="card-body">
@@ -42,13 +42,14 @@
                         <th>No Rekening</th>
                         <th>Atas Nama</th>
                         <th>Status</th>
+                        <th>Payment</th>
                     </tr>
                 </thead>
                 <tbody></tbody>
             </table>
             <div class="card-footer">
                 <div class="text-right">
-                    <a href="#" class="btn btn-danger btn-sm"
+                    <a href="{{ route('transfer', ['dari' => request()->input('dari'), 'sampai' => request()->input('sampai')]) }}" class="btn btn-danger btn-sm"
                         id="export-pdf">
                         <i class="fa fa-file-pdf"></i> Export PDF
                     </a>
@@ -94,6 +95,7 @@
                             <td>${val.no_rekening}</td>
                             <td>${val.atas_nama}</td>
                             <td>${val.status}</td>
+                            <td>${val.payment}</td>
                         </tr>
                         `;
                 });

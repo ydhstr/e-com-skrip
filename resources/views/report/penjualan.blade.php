@@ -46,7 +46,7 @@
             </table>
             <div class="card-footer">
                 <div class="text-right">
-                    <a href="#" class="btn btn-danger btn-sm"
+                    <a href="{{ route('jual', ['dari' => request()->input('dari'), 'sampai' => request()->input('sampai')]) }}" class="btn btn-danger btn-sm"
                         id="export-pdf">
                         <i class="fa fa-file-pdf"></i> Export PDF
                     </a>

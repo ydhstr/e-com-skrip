@@ -18,12 +18,10 @@ class ReportController extends Controller
     {
         return view('report.index');
     }
-    
     public function penjualan_list()
     {
         return view('report.penjualan');
     }
-    
     public function pembayaran_list()
     {
         return view('report.pembayaran');
@@ -44,42 +42,14 @@ class ReportController extends Controller
     {
         return view('report.barangdiminati');
     }
-   /*  public function get_reports(Request $request)
-    {
-        $report = DB::table('order_details')
-            ->join('products', 'products.id', '=', 'order_details.id_produk')
-            ->select(DB::raw('
-                nama_barang,
-                count(*) as jumlah_dibeli,
-                harga,
-                SUM(total) as pendapatan,
-                SUM(jumlah) as total_qty'))
-            ->whereRaw("date(order_details.created_at) >= '$request->dari'")
-            ->whereRaw("date(order_details.created_at) <=' $request->sampai'")
-            ->groupBy('id_produk', 'nama_barang', 'harga')
-            ->get();
-
-        return response()->json([
-            'data' => $report
-        ]);
-    } */
-
     
+    public function beli_list()
+    {
+        return view('report.pembelian');
+    }
+
 public function get_reports(Request $request)
 {
-    /* $report = DB::table('order_details')
-        ->join('products', 'products.id', '=', 'order_details.id_produk')
-        ->select(DB::raw('
-            nama_barang,
-            count(*) as jumlah_dibeli,
-            harga,
-            SUM(total) as pendapatan,
-            SUM(jumlah) as total_qty'))
-        ->whereRaw("date(order_details.created_at) >= ?", [$request->dari])
-        ->whereRaw("date(order_details.created_at) <= ?", [$request->sampai])
-        ->groupBy('id_produk', 'nama_barang', 'harga')
-        ->get(); */
-
         $report = DB::table('order_details')
     ->join('products', 'products.id', '=', 'order_details.id_produk')
     ->select(DB::raw('
@@ -112,7 +82,7 @@ public function pdf1(Request $request)
             ->select(DB::raw('
                 nama_barang,
                 count(*) as jumlah_dibeli,
-                harga,
+                harga - diskon as harga,
                 SUM(jumlah) as total_qty'))
             ->whereRaw("date(order_details.created_at) >= '$request->dari'")
             ->whereRaw("date(order_details.created_at) <=' $request->sampai'")
@@ -123,6 +93,15 @@ public function pdf1(Request $request)
             'data' => $report
         ]);
     }
+    
+public function jual(Request $request)
+{
+    $dari = $request->dari;
+    $sampai = $request->sampai;
+    $response = $this->penjualan($request);
+    $report = $response->getData()->data;
+    return view('report.penjualanpdf', compact('report', 'dari', 'sampai'));
+}
 
 public function pembayaran(Request $request)
 {
@@ -138,19 +117,26 @@ public function pembayaran(Request $request)
             payments.payment'))
         ->whereRaw("date(payments.created_at) >= '$request->dari'")
         ->whereRaw("date(payments.created_at) <=' $request->sampai'")
-        /* ->where('payment', 'Transfer Bank') */
+        ->where('status', 'DITERIMA')
+        ->where('payment', 'Transfer')
         ->get();
 
     return response()->json([
         'data' => $reports
     ]);
 }
+public function transfer(Request $request)
+{
+    $dari = $request->dari;
+    $sampai = $request->sampai;
+    $response = $this->pembayaran($request);
+    $report = $response->getData()->data;
+    return view('report.transferpdf', compact('report', 'dari', 'sampai'));
+}
 
-    
     public function orderselesai(Request $request)
     {
         $report = DB::table('orders')
-        
         ->join('members', 'members.id', '=', 'orders.id_member')
         ->select(DB::raw('
             members.nama_member,
@@ -167,7 +153,15 @@ public function pembayaran(Request $request)
         'data' => $report
     ]);
     }
-   
+    public function done(Request $request)
+    {
+        $dari = $request->dari;
+        $sampai = $request->sampai;
+        $response = $this->orderselesai($request);
+        $report = $response->getData()->data;
+        return view('report.selesaipdf', compact('report', 'dari', 'sampai'));
+    }
+
     public function barangdiminati(Request $request)
     {
         $report = DB::table('order_details')
@@ -176,6 +170,7 @@ public function pembayaran(Request $request)
                 nama_barang,
                 count(*) as jumlah_dibeli,
                 harga,
+                warna,
                 SUM(jumlah) as total_qty'))
             ->whereRaw("date(order_details.created_at) >= '$request->dari'")
             ->whereRaw("date(order_details.created_at) <=' $request->sampai'")
@@ -185,6 +180,42 @@ public function pembayaran(Request $request)
         return response()->json([
             'data' => $report
         ]);
+    }
+    public function minat(Request $request)
+    {
+        $dari = $request->dari;
+        $sampai = $request->sampai;
+        $response = $this->barangdiminati($request);
+        $report = $response->getData()->data;
+        return view('report.minatpdf', compact('report', 'dari', 'sampai'));
+    }
+
+    public function orderrefund(Request $request)
+    {
+        $report = DB::table('orders')
+        ->join('members', 'members.id', '=', 'orders.id_member')
+        ->select(DB::raw('
+            members.nama_member,
+            orders.invoice,
+            orders.grand_total,
+            orders.created_at,
+            orders.status'))
+        ->whereRaw("date(orders.created_at) >= ?", [$request->dari])
+        ->whereRaw("date(orders.created_at) <= ?", [$request->sampai])
+        ->where('status', 'Refund')
+        ->get();
+    
+    return response()->json([
+        'data' => $report
+    ]);
+    }
+    public function kembali(Request $request)
+    {
+        $dari = $request->dari;
+        $sampai = $request->sampai;
+        $response = $this->orderrefund($request);
+        $report = $response->getData()->data;
+        return view('report.refundpdf', compact('report', 'dari', 'sampai'));
     }
 
     public function pembayarancod(Request $request)
@@ -201,12 +232,49 @@ public function pembayaran(Request $request)
             payments.payment'))
         ->whereRaw("date(payments.created_at) >= '$request->dari'")
         ->whereRaw("date(payments.created_at) <=' $request->sampai'")
-        /* ->where('payment', 'COD') */
+        ->where('status', 'DITERIMA')
+        ->where('payment', 'COD')
         ->get();
 
     return response()->json([
         'data' => $reports
     ]);
 }
+public function cod(Request $request)
+{
+    $dari = $request->dari;
+    $sampai = $request->sampai;
+    $response = $this->pembayarancod($request);
+    $report = $response->getData()->data;
+    return view('report.codpdf', compact('report', 'dari', 'sampai'));
+}
 
+public function users(Request $request)
+{
+    $reports = DB::table('order_details')
+    ->join('orders', 'orders.id', '=', 'order_details.id_order')
+    ->join('members', 'members.id', '=', 'orders.id_member')
+    ->select('members.nama_member', 
+            'members.email',  
+            DB::raw('SUM(order_details.jumlah) as total_jumlah'),
+            DB::raw('SUM(order_details.total) as total_total')
+        )
+    ->whereRaw("date(order_details.created_at) >= '$request->dari'")
+    ->whereRaw("date(order_details.created_at) <= '$request->sampai'")
+    ->groupBy('members.nama_member', 'members.email')
+    ->get();
+
+return response()->json([
+    'data' => $reports
+]);
+}
+
+public function pembelian(Request $request)
+{
+    $dari = $request->dari;
+    $sampai = $request->sampai;
+    $response = $this->users($request);
+    $report = $response->getData()->data;
+    return view('report.pembelianpdf', compact('report', 'dari', 'sampai'));
+}
 }

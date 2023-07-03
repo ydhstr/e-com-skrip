@@ -147,15 +147,9 @@ class AuthController extends Controller
 
     public function logout()
     {
-        if (Auth::guard('webstore')->check()){
-            Auth::guard('webstore')->logout();
-            Session::flush();
-            return redirect('/');
-        } elseif(Auth::guard('web')->check()){
             Auth::guard('web')->logout();
             Session::flush();
             return redirect('/login');
-        }
     }
 
     public function logout_member()

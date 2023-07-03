@@ -67,7 +67,7 @@
                         @endif
                         <a class="collapse-item" href="/pengembalian">Data Refund</a>
                         @if (Auth::guard('web')->user())
-                        <a class="collapse-item" href="/#">Data Aduan</a>
+                        <a class="collapse-item" href="/pengaduan">Data Aduan</a>
                         @endif
                     </div>
                 </div>
@@ -113,6 +113,7 @@
                         <a class="collapse-item" href="/laporan/barangdiminati">Laporan Barang Diminati</a>
                         <a class="collapse-item" href="/laporan/refund">Laporan Barang Refund</a>
                         <a class="collapse-item" href="/laporan/codreport">Laporan Pembayaran COD</a>
+                        <a class="collapse-item" href="/laporan/beli">Laporan Pembelian</a>
                     </div>
                 </div>
             </li>
@@ -122,11 +123,21 @@
                     <span>Tentang</span></a>
             </li>
             @endif
-            <li class="nav-item">
-                <a class="nav-link" href="/logout">
-                    <i class="fas fa-fw fa-sign-out-alt"></i>
-                    <span>Logout</span></a>
-            </li>
+    @if (Auth::guard('webstore')->check())
+    <li class="nav-item">
+        <a class="nav-link" href="/logout_store">
+            <i class="fas fa-fw fa-sign-out-alt"></i>
+            <span>Logout</span>
+        </a>
+    </li>
+    @elseif (Auth::guard('web')->check())
+    <li class="nav-item">
+        <a class="nav-link" href="/logout">
+            <i class="fas fa-fw fa-sign-out-alt"></i>
+            <span>Logout</span>
+        </a>
+    </li>
+    @endif
 
         </ul>
         <!-- End of Sidebar -->
@@ -167,10 +178,17 @@
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                  aria-labelledby="userDropdown">
+                                @if (Auth::guard('webstore')->check())
+                                <a class="dropdown-item" href="/logout_store">
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Logout
+                                </a>
+                                @elseif (Auth::guard('web')->check())
                                 <a class="dropdown-item" href="/logout">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Logout
                                 </a>
+                                @endif
                             </div>
                         </li>
                     </ul>

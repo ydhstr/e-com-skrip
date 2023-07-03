@@ -11,6 +11,8 @@ use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\SliderController;
 use App\Http\Controllers\SubcategoryController;
 use App\Http\Controllers\TestimoniController;
+use App\Http\Controllers\RefundController;
+use App\Http\Controllers\AduanController;
 use App\Models\Review;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -39,6 +41,7 @@ Route::group([
                 'orders' => OrderController::class,
                 'payments' => PaymentController::class,
                 'refunds' => RefundController::class,
+                'aduans' => AduanController::class,
             ]);
 
             Route::get('pesanan/baru', [OrderController::class, 'baru']);
@@ -57,5 +60,7 @@ Route::group([
             Route::get('reports/orderselesai', [ReportController::class, 'orderselesai']);
             Route::get('reports/barangdiminati', [ReportController::class, 'barangdiminati']);
             Route::get('reports/codreport', [ReportController::class, 'pembayarancod']);
+            Route::get('reports/orderrefund', [ReportController::class, 'orderrefund']);
+            Route::get('reports/users', [ReportController::class, 'users']);
         }
     );

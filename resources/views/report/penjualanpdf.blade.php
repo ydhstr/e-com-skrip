@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Laporan Data Pendapatan</title>
+    <title>Laporan Data Penjualan</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
@@ -30,7 +30,6 @@
                 <th>Harga</th>
                 <th>Jumlah Dibeli</th>
                 <th>Total Qty</th>
-                <th>Pendapatan</th>
             </tr>
         </thead>
         <tbody>  
@@ -41,7 +40,6 @@
                 <td class="border px-6 py-4">{{ $item->harga }}</td>
                 <td class="border px-6 py-4">{{ $item->jumlah_dibeli }}</td>
                 <td class="border px-6 py-4">{{ $item->total_qty }}</td>
-                <td class="border px-6 py-4">{{ $item->pendapatan }}</td>
             </tr>
             @endforeach
         </tbody>

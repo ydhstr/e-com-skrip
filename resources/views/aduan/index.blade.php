@@ -1,12 +1,12 @@
 @extends('layout.app')
 
-@section('title', 'Data Kategori')
+@section('title', 'Data Aduan')
 
 @section('content')
 <div class="card shadow">
     <div class="card-header">
         <h4 class="card-title">
-            Data Kategori
+            Data Aduan
         </h4>
     </div>
     <div class="card-body">
@@ -14,21 +14,15 @@
             <a href="#modal-form" data-toggle="modal" class="btn btn-primary modal-tambah">Tambah Data</a>
         </div>
         <div class="table-responsive">
-            <div class="row">
-                <div class="col-sm-12 col-md-6">
-                    <div class="dataTables_length" id="dataTable_length">
-                        <label>Show<select name="dataTable_length" aria-controls="dataTable" class="custom-select custom-select-sm form-control form-control-sm">
-                            <option value="10">10</option><option value="25">25</option>
-                            <option value="50">50</option><option value="100">100</option>
-                        </select> entries</label></div></div><div class="col-sm-12 col-md-6"><div id="dataTable_filter" class="dataTables_filter"><label>Search:<input type="search" class="form-control form-control-sm" placeholder="" aria-controls="dataTable"></label></div></div></div>
             <table class="table table-bordered table-hover table-striped">
                 <thead>
                     <tr>
                         <th>Aksi</th>
                         <th>No</th>
-                        <th>Nama Kategori</th>
+                        <th>Nama</th>
+                        <th>Email</th>
+                        <th>Subjek</th>
                         <th>Deskripsi</th>
-                        <th>Gambar</th>
                     </tr>
                 </thead>
                 <tbody></tbody>
@@ -41,7 +35,7 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Form Kategori</h5>
+                <h5 class="modal-title">Form Aduan</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -49,11 +43,21 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="col-md-12">
-                        <form action="{{ route('categories.store') }}" class="form-kategori" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('aduans.store') }}" class="form-Aduan" method="POST" enctype="multipart/form-data">
                         @csrf
                             <div class="form-group">
-                                <label for="">Nama Kategori</label>
-                                <input value="{{ old('nama_kategori') }}" type="text" class="form-control" name="nama_kategori" placeholder="Nama Kategori"
+                                <label for="">Nama</label>
+                                <input value="{{ old('nama') }}" type="text" class="form-control" name="nama" placeholder="Nama"
+                                    required>
+                            </div>
+                            <div class="form-group">
+                                <label for="">Email</label>
+                                <input value="{{ old('email') }}" type="email" class="form-control" name="email" placeholder="Email"
+                                    required>
+                            </div>
+                            <div class="form-group">
+                                <label for="">Subjek</label>
+                                <input value="{{ old('subjek') }}" type="subjek" class="form-control" name="subjek" placeholder="Subjek"
                                     required>
                             </div>
                             <div value="{{ old('deskripsi') }}"
@@ -61,10 +65,6 @@
                                 <label for="">Deskripsi</label>
                                 <textarea name="deskripsi" placeholder="Deskripsi" class="form-control" id="" cols="30"
                                     rows="10" required></textarea>
-                            </div>
-                            <div value="{{ old('gambar') }}" class="form-group">
-                                <label for="">Gambar</label>
-                                <input type="file" class="form-control" name="gambar">
                             </div>
                             <div class="form-group">
                                 <button type="submit" class="btn btn-primary btn-block">Submit</button>
@@ -92,7 +92,7 @@
 <script>
     $(function() {
         $.ajax({
-            url: '/api/categories',
+            url: '/api/aduans',
             success: function({
                 data
             }) {
@@ -106,9 +106,10 @@
                                 <a href="#" data-id="${val.id}" class="btn btn-danger btn-hapus">hapus</a>
                             </td>
                             <td>${index+1}</td>
-                            <td>${val.nama_kategori}</td>
+                            <td>${val.nama}</td>
+                            <td>${val.email}</td>
+                            <td>${val.subjek}</td>
                             <td>${val.deskripsi}</td>
-                            <td width="200px"><img src="/uploads/${val.gambar}" width="150"></td>
                         </tr>
                         `;
                 });
@@ -125,7 +126,7 @@
 
             if (confirm_dialog) {
                 $.ajax({
-                    url: '/api/categories/' + id,
+                    url: '/api/aduans/' + id,
                     type: "DELETE",
                     headers: {
                         "Authorization": 'Bearer ' + token
@@ -144,10 +145,10 @@
 /* 
         $('.modal-tambah').click(function() {
             $('#modal-form').modal('show')
-            $('input[name="nama_kategori"]').val('')
+            $('input[name="nama_Aduan"]').val('')
             $('textarea[name="deskripsi"]').val('')
 
-            $('.form-kategori').submit(function(e) {
+            $('.form-Aduan').submit(function(e) {
                 e.preventDefault()
                 const token = localStorage.getItem('token')
                 const frmdata = new FormData(this);
@@ -182,11 +183,13 @@
             $.get('/api/categories/' + id, function({
                 data
             }) {
-                $('input[name="nama_kategori"]').val(data.nama_kategori);
+                $('input[name="nama"]').val(data.nama);
+                $('input[name="email"]').val(data.email);
+                $('input[name="subjek"]').val(data.subjek);
                 $('textarea[name="deskripsi"]').val(data.deskripsi);
             });
 
-            $('.form-kategori').submit(function(e) {
+            $('.form-Aduan').submit(function(e) {
                 e.preventDefault()
                 const token = localStorage.getItem('token')
                 const frmdata = new FormData(this);

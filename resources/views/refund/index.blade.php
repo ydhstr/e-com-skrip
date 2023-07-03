@@ -42,7 +42,7 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="col-md-12">
-                        <form action="{{ route('refund.store') }}" class="form-Refund" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('refunds.store') }}" class="form-Refund" method="POST" enctype="multipart/form-data">
                         @csrf
                             <div class="form-group">
                                 <label for="">ID Member</label>

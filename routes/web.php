@@ -14,6 +14,7 @@ use App\Http\Controllers\SubcategoryController;
 use App\Http\Controllers\TentangController;
 use App\Http\Controllers\TestimoniController;
 use App\Http\Controllers\RefundController;
+use App\Http\Controllers\AduanController;
 use Illuminate\Support\Facades\Route;
 
 // auth
@@ -43,6 +44,7 @@ Route::get('/barang', [ProductController::class, 'list']);
 Route::get('/testimoni', [TestimoniController::class, 'list']);
 Route::get('/review', [ReviewController::class, 'list']);
 Route::get('/pengembalian', [RefundController::class, 'list']);
+Route::get('/pengaduan', [AduanController::class, 'list']);
 Route::get('/payment', [PaymentController::class, 'list']);
 
 Route::get('/pesanan/baru', [OrderController::class, 'list']);
@@ -60,6 +62,7 @@ Route::get('/laporan/orderselesai', [ReportController::class, 'orderselesai_list
 Route::get('/laporan/barangdiminati', [ReportController::class, 'barangdiminati_list']);
 Route::get('/laporan/codreport', [ReportController::class, 'codreport_list']);
 Route::get('/laporan/refund', [ReportController::class, 'orderrefund_list']);
+Route::get('/laporan/beli', [ReportController::class, 'beli_list']);
 
 Route::get('/tentang', [TentangController::class, 'index']);
 Route::post('/tentang/{about}', [TentangController::class, 'update']);
@@ -94,3 +97,10 @@ Route::post('/aduan', [HomeController::class, 'aduan']);
 
 //laporan pdf
 Route::get('/laporan/pdf', [ReportController::class, 'pdf1'])->name('pdf1');
+Route::get('/laporan/jual', [ReportController::class, 'jual'])->name('jual');
+Route::get('/laporan/transfer', [ReportController::class, 'transfer'])->name('transfer');
+Route::get('/laporan/done', [ReportController::class, 'done'])->name('done');
+Route::get('/laporan/minat', [ReportController::class, 'minat'])->name('minat');
+Route::get('/laporan/kembali', [ReportController::class, 'kembali'])->name('kembali');
+Route::get('/laporan/cod', [ReportController::class, 'cod'])->name('cod');
+Route::get('/laporan/pembelian', [ReportController::class, 'pembelian'])->name('pembelian');

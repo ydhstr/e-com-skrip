@@ -1,12 +1,12 @@
 @extends('layout.app')
 
-@section('title', 'Laporan Penjualan')
+@section('title', 'Laporan Data Barang Diminati')
 
 @section('content')
 <div class="card shadow">
     <div class="card-header">
         <h4 class="card-title">
-            Laporan Penjualan
+            Laporan Data Barang Diminati
         </h4>
     </div>
     <div class="card-body">
@@ -39,6 +39,7 @@
                         <th>Nama Barang</th>
                         <th>Harga</th>
                         <th>Jumlah Dibeli</th>
+                        <th>Warna</th>
                         <th>Total Qty</th>
                     </tr>
                 </thead>
@@ -46,7 +47,7 @@
             </table>
             <div class="card-footer">
                 <div class="text-right">
-                    <a href="#" class="btn btn-danger btn-sm"
+                    <a href="{{ route('minat', ['dari' => request()->input('dari'), 'sampai' => request()->input('sampai')]) }}" class="btn btn-danger btn-sm"
                         id="export-pdf">
                         <i class="fa fa-file-pdf"></i> Export PDF
                     </a>
@@ -91,6 +92,7 @@
                             <td>${val.nama_barang}</td>
                             <td>${rupiah(val.harga)}</td>
                             <td>${val.jumlah_dibeli}</td>
+                            <td>${val.warna}</td>
                             <td>${val.total_qty}</td>
                         </tr>
                         `;
