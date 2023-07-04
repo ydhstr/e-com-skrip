@@ -67,12 +67,6 @@
                             <div class="form-group">
                                 <button type="submit" class="btn btn-primary btn-block">Submit</button>
                             </div>
-                           <!--  @if ($message = Session::get('success'))
-      <div class="alert alert-success alert-block">
-        <button type="button" class="close" data-dismiss="alert">×</button>	
-          <strong>{{ $message }}</strong>
-      </div>
-                            @endif -->
                         </form>
                     </div>
                 </div>
@@ -104,7 +98,7 @@
                                 <a href="#" data-id="${val.id}" class="btn btn-danger btn-hapus">hapus</a>
                             </td>
                             <td>${index+1}</td>
-                            <td>${val.id_member}</td>
+                            <td>${val.nama_member}</td>
                             <td>${val.id_order}</td>
                             <td>${val.deskripsi}</td>
                             <td width="200px"><img src="/uploads/${val.gambar}" width="150"></td>

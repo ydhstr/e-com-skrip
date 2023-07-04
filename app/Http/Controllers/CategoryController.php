@@ -6,6 +6,7 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Pagination\Paginator;
 
 class CategoryController extends Controller
 {
@@ -27,7 +28,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::all();
+        $categories =  Category::paginate(10);
 
         return response()->json([
             'data' => $categories

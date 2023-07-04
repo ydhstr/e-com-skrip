@@ -10,17 +10,10 @@
         </h4>
     </div>
     <div class="card-body">
-        <div class="d-flex justify-content-end mb-4">
+        <div class="d-flex justify-content-end mb-2">
             <a href="#modal-form" data-toggle="modal" class="btn btn-primary modal-tambah">Tambah Data</a>
         </div>
         <div class="table-responsive">
-            <div class="row">
-                <div class="col-sm-12 col-md-6">
-                    <div class="dataTables_length" id="dataTable_length">
-                        <label>Show<select name="dataTable_length" aria-controls="dataTable" class="custom-select custom-select-sm form-control form-control-sm">
-                            <option value="10">10</option><option value="25">25</option>
-                            <option value="50">50</option><option value="100">100</option>
-                        </select> entries</label></div></div><div class="col-sm-12 col-md-6"><div id="dataTable_filter" class="dataTables_filter"><label>Search:<input type="search" class="form-control form-control-sm" placeholder="" aria-controls="dataTable"></label></div></div></div>
             <table class="table table-bordered table-hover table-striped">
                 <thead>
                     <tr>
@@ -33,6 +26,7 @@
                 </thead>
                 <tbody></tbody>
             </table>
+            <div id="pagination-links"></div>
         </div>
     </div>
 </div>
@@ -69,12 +63,7 @@
                             <div class="form-group">
                                 <button type="submit" class="btn btn-primary btn-block">Submit</button>
                             </div>
-                           <!--  @if ($message = Session::get('success'))
-      <div class="alert alert-success alert-block">
-        <button type="button" class="close" data-dismiss="alert">×</button>	
-          <strong>{{ $message }}</strong>
-      </div>
-                            @endif -->
+                           
                         </form>
                     </div>
                 </div>
@@ -91,31 +80,70 @@
 @push('js')
 <script>
     $(function() {
-        $.ajax({
-            url: '/api/categories',
-            success: function({
-                data
-            }) {
+    $.ajax({
+        url: '/api/categories',
+        success: function(response) {
+            let data = response.data;
+            let row = '';
 
-                let row;
-                data.map(function(val, index) {
+            data.data.forEach(function(val, index) {
+                row += `
+                    <tr>
+                        <td width="150px">
+                            <a href="#modal-form" data-id="${val.id}" class="btn btn-warning modal-ubah">Edit</a>
+                            <a href="#" data-id="${val.id}" class="btn btn-danger btn-hapus">hapus</a>
+                        </td>
+                        <td>${index + 1}</td>
+                        <td>${val.nama_kategori}</td>
+                        <td>${val.deskripsi}</td>
+                        <td width="200px"><img src="/uploads/${val.gambar}" width="150"></td>
+                    </tr>
+                `;
+            });
+
+            $('tbody').html(row);
+
+            // Display pagination links
+            $('#pagination-links').html(data.links);
+        }
+    });
+
+    // Event listener for pagination links
+    $(document).on('click', '#pagination-links a', function(event) {
+        event.preventDefault();
+
+        // Get the URL from the pagination link
+        let url = $(this).attr('href');
+
+        // Make an AJAX request to the new URL
+        $.ajax({
+            url: url,
+            success: function(response) {
+                let data = response.data;
+                let row = '';
+
+                data.data.forEach(function(val, index) {
                     row += `
                         <tr>
                             <td width="150px">
                                 <a href="#modal-form" data-id="${val.id}" class="btn btn-warning modal-ubah">Edit</a>
                                 <a href="#" data-id="${val.id}" class="btn btn-danger btn-hapus">hapus</a>
                             </td>
-                            <td>${index+1}</td>
+                            <td>${index + 1}</td>
                             <td>${val.nama_kategori}</td>
                             <td>${val.deskripsi}</td>
                             <td width="200px"><img src="/uploads/${val.gambar}" width="150"></td>
                         </tr>
-                        `;
+                    `;
                 });
 
-                $('tbody').append(row)
+                $('tbody').html(row);
+
+                // Display pagination links
+                $('#pagination-links').html(data.links);
             }
         });
+    });
 
         $(document).on('click', '.btn-hapus', function() {
             const id = $(this).data('id')

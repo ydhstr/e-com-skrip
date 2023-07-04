@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Refund;
+use App\Models\Member;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Validator;
@@ -15,8 +16,8 @@ class RefundController extends Controller
     }
  */
 public function list()
-{
-    return view('refund.index');
+{   $members = Member::all();
+    return view('refund.index', compact('members'));
 }
 
 /**
@@ -25,9 +26,10 @@ public function list()
  * @return \Illuminate\Http\Response
  */
 public function index()
-{
-    $refunds = Refund::all();
-
+{   
+    $refunds = Refund::join('members', 'refunds.id_member', '=', 'members.id')
+                    ->select('refunds.*', 'members.nama_member')
+                    ->get();
     return response()->json([
         'data' => $refunds
     ]);

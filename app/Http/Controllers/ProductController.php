@@ -30,14 +30,30 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        $products = Product::with('category', 'subcategory')->get();
+    public function index(Request $request)
+{
+    $search = $request->input('search');
 
-        return response()->json([
-            'data' => $products
-        ]);
+    $query = Product::with('category', 'subcategory');
+
+    if ($search) {
+        $query->where('nama_barang', 'LIKE', "%$search%");
     }
+
+    $products = $query->paginate(10);
+
+    // Transform the pagination data to the desired format
+    $pagination = [
+        'current_page' => $products->currentPage(),
+        'last_page' => $products->lastPage(),
+    ];
+
+    return response()->json([
+        'data' => $products->items(),
+        'pagination' => $pagination,
+    ]);
+}
+
 
     /**
      * Show the form for creating a new resource.

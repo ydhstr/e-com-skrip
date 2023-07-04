@@ -23,34 +23,43 @@
 <!-- Promo Banners -->
 <section class="pt-40 pb-20">
     <div class="container">
-    <div class="row heading-row">
+        <div class="row heading-row">
             <div class="col-md-12 text-center">
                 <h2 class="heading bottom-line">
-                   Kategori
+                    Kategori
                 </h2>
             </div>
         </div>
         <div class="row">
             @foreach ($categories as $category)
-            <div class="col-xs-4 col-xxs-12 mb-30 promo-banner">
-            @php
-                $subcategories = App\Models\Subcategory::where('id_kategori',$category->id)->get();
-            @endphp
-                @foreach ($subcategories as $subcategory)
-                <a href="/products/{{$subcategory->id}}">
-                    <img src="/uploads/{{$category->gambar}}" alt="">
-                    <div class="overlay"></div>
-                    <div class="promo-inner valign">
-                        <h2>{{$category->nama_kategori}}</h2>
-                        <span>{{$category->deskripsi}}</span>
+                <div class="col-xs-4 col-xxs-12 mb-30 promo-banner">
+                    <a href="/products/{{$category->id}}">
+                        <img src="/uploads/{{$category->gambar}}" alt="">
+                        <div class="overlay"></div>
+                        <div class="promo-inner valign">
+                            <h2>{{$category->nama_kategori}}</h2>
+                            <span>{{$category->deskripsi}}</span>
+                        </div>
+                    </a>
+                    <div class="subcategories">
+                        @php
+                            $subcategories = App\Models\Subcategory::where('id_kategori', $category->id)->get();
+                        @endphp
+                        <div class="row">
+                            @foreach ($subcategories as $subcategory)
+                                <div class="col-md-6">
+                                    <!-- Render your subcategory data here -->
+                                    <a href="/products/{{$subcategory->id}}">{{$subcategory->nama}}</a>
+                                </div>
+                            @endforeach
+                        </div>
                     </div>
-                </a>
-            </div>
-            @endforeach
+                </div>
             @endforeach
         </div>
     </div>
-</section> <!-- end promo banners -->
+</section>
+ <!-- end promo banners -->
 
 <!-- Trendy Products -->
 <section class="section-wrap-sm new-arrivals pb-50">

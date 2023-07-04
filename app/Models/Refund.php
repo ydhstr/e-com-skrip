@@ -12,7 +12,7 @@ class Refund extends Model
 
     public function member()
     {
-        return $this->belongsTo(Member::class, 'id_member', 'id');
+        return $this->belongsTo(Member::class);
     }
 
     public function order()
