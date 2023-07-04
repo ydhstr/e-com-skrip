@@ -18,9 +18,8 @@
                 <form action="{{ route('products.index') }}" method="GET" class="form-inline">
                     <div class="d-flex justify-content-end">
                     <div class="form-group mr-2">
-                        <input type="text" name="search" class="form-control" placeholder="Search">
+                        <input type="text" name="search" class="form-control" placeholder="Search" id="search-input">
                     </div>
-                    <button type="submit" class="btn btn-primary">Search</button>
                 </div>
                 </form>
             </div>
@@ -144,11 +143,11 @@
 @push('js')
 <script>
    $(function() {
-    function loadData(page) {
-        $.ajax({
-            url: '/api/products',
-            data: { page: page },
-            success: function(response) {
+    function loadData(page, search) {
+            $.ajax({
+                url: '/api/products',
+                data: { page: page, search: search },
+                success: function(response) {
                 let data = response.data;
 
                 if (Array.isArray(data)) {
@@ -184,10 +183,17 @@
                     console.error('Invalid data format:', data);
                 }
 
+                if (page === 1) {$('.pagination').remove();}
+
                 if (response.pagination) {
                     let pagination = `
                         <ul class="pagination">
                     `;
+
+                     if (response.pagination && page === 1) {
+        let pagination = `
+            <ul class="pagination">
+        `;}
                     if (response.pagination.current_page > 1) {
                         pagination += `
                             <li class="page-item">
@@ -258,6 +264,11 @@
         } else {
             $('.page-item:first-child').removeClass('disabled');
         }
+    });
+
+    $('#search-input').on('input', function() {
+    const searchValue = $(this).val();
+    loadData(1, searchValue);
     });
 
         $(document).on('click', '.btn-hapus', function() {
