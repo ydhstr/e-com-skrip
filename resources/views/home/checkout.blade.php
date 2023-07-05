@@ -104,7 +104,7 @@
                                 <ul class="payment_methods methods">
                                     <li class="payment_method_bacs">
                                         <input id="payment_method_bacs" type="radio" class="input-radio"
-                                            name="payment" value="Transfer" checked="checked">
+                                            name="payment" value="Transfer">
                                         <label for="payment_method_bacs">Direct Bank Transfer</label>
                                         <div class="payment_box payment_method_bacs">
                                             <p>Make your payment directly into our bank account. Please use your Order
@@ -114,15 +114,14 @@
                                             <p>No Rekening : {{$about->no_rekening}}</p>
                                         </div>
                                     </li>
-                                    <li class="payment_method_cheque">
-                          <input id="payment_method_cheque" type="radio" class="input-radio" name="payment" value="COD">
-                          <label for="payment_method_cheque">Cash On Delivery</label>
-                          <div class="payment_box payment_method_cheque">
-                            <p>Please send your cheque to Store Name, Store Street, Store Town, Store State / County, Store Postcode.</p>
-                          </div>
+                        <li class="payment_method_cheque">
+                                <input id="payment_method_cheque" type="radio" class="input-radio" name="payment" value="COD">
+                                    <label for="payment_method_cheque">Cash On Delivery</label>
+                                <div class="payment_box payment_method_cheque">
+                                    <p>Please send your cheque to Store Name, Store Street, Store Town, Store State / County, Store Postcode.</p>
+                            </div>
                         </li>
-
-                                </ul>
+                    </ul>
                                 <div class="form-row place-order">
                                     <input type="submit" name="ecommerce_checkout_place_order"
                                         class="btn btn-lg btn-dark" id="place_order" value="Place order">
@@ -158,4 +157,52 @@
             });
         })
 </script>
+<script>
+    $(document).ready(function() {
+        $('input[name="payment"]').change(function() {
+            var paymentMethod = $(this).val();
+            var grandTotal = "{{ $grandTotal }}"; // Nilai grand_total yang Anda miliki
+
+            if (paymentMethod === 'Transfer') {
+                $('input[name="jumlah"]').val(grandTotal);
+            } else if (paymentMethod === 'COD') {
+                $('input[name="jumlah"]').val('0');
+            }
+        });
+    });
+</script>
+<script>
+    $(document).ready(function() {
+        $('form[name="checkout"]').submit(function(event) {
+            var paymentMethod = $('input[name="payment"]:checked').val();
+
+            if (paymentMethod === undefined) {
+                event.preventDefault(); // Mencegah pengiriman formulir
+                alert('Mohon pilih metode pembayaran.');
+            }
+        });
+$('form[name="checkout"]').submit(function(event) {
+            var paymentMethod = $('input[name="payment"]:checked').val();
+            var provinsi = $('select[name="provinsi"]').val();
+            var kota = $('select[name="kabupaten"]').val();
+            var detailAlamat = $('input[name="detail_alamat"]').val();
+            var atasNama = $('input[name="atas_nama"]').val();
+            var noRekening = $('input[name="no_rekening"]').val();
+            var jumlah = $('input[name="jumlah"]').val();
+
+            if (
+                paymentMethod === undefined ||
+                provinsi === '' ||
+                kota === '' ||
+                detailAlamat === '' ||
+                atasNama === '' ||
+                noRekening === '' ||
+                jumlah === ''
+            ) {
+                event.preventDefault(); // Mencegah pengiriman formulir
+                alert('Mohon lengkapi semua kolom.');
+            }
+        });
+    });
+    </script>
 @endpush

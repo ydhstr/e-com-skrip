@@ -17,11 +17,11 @@
             <table class="table table-bordered table-hover table-striped">
                 <thead>
                     <tr>
+                        <th>Aksi</th>
                         <th>No</th>
                         <th>Nama Testimoni</th>
                         <th>Deskripsi</th>
                         <th>Gambar</th>
-                        <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody></tbody>
@@ -87,14 +87,14 @@
                 data.map(function(val, index) {
                     row += `
                         <tr>
-                            <td>${index+1}</td>
-                            <td>${val.nama_testimoni}</td>
-                            <td>${val.deskripsi}</td>
-                            <td><img src="/uploads/${val.gambar}" width="150"></td>
                             <td>
                                 <a href="#modal-form" data-id="${val.id}" class="btn btn-warning modal-ubah">Edit</a>
                                 <a href="#" data-id="${val.id}" class="btn btn-danger btn-hapus">hapus</a>
                             </td>
+                            <td>${index+1}</td>
+                            <td>${val.nama_testimoni}</td>
+                            <td>${val.deskripsi}</td>
+                            <td><img src="/uploads/${val.gambar}" width="150"></td>
                         </tr>
                         `;
                 });

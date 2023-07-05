@@ -25,11 +25,11 @@ class HomeController extends Controller
     {
         $sliders = Slider::all();
         $categories = Category::all();
-        /* $stores = Store::skip(0)->take(5)->get(); */
+        $stores = Store::all();
         $testimonies = Testimoni::all();
         $products = Product::skip(0)->take(8)->get();
 
-        return view('home.index', compact('sliders', 'categories', 'testimonies', 'products'));
+        return view('home.index', compact('sliders', 'categories', 'testimonies', 'products', 'stores'));
     }
 
     public function products($id_subcategory)
@@ -219,10 +219,11 @@ class HomeController extends Controller
 
     public function payments(Request $request)
     {
+        $jumlah = str_replace(',', '', $request->jumlah);
         Payment::create([
             'id_order' => $request->id_order,
             'id_member' => Auth::guard('webmember')->user()->id,
-            'jumlah' => $request->jumlah,
+            'jumlah' => $jumlah,
             'provinsi' => $request->provinsi,
             'kabupaten' => $request->kabupaten,
             'kecamatan' => "",
@@ -286,9 +287,11 @@ class HomeController extends Controller
         return view('home.faq');
     }
     
-    public function store()
+    public function store($tags)
     {
-        return view('home.store');
+        $products = Product::where('tags', $tags)->paginate(12);
+        $store = Store::all();
+        return view('home.store', compact('products','store'));
     }
     public function penilaian()
     {

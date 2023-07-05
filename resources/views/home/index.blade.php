@@ -110,7 +110,8 @@
                                     <span class="amount">Rp. {{number_format($product->harga - $product->diskon)}}</span>
                                 </ins>
                     @else
-                               <span>Rp. {{number_format($product->harga)}}</span>
+                <ins>
+                               <span>Rp. {{number_format($product->harga)}}</span></ins>
                     @endif
                                 </span>
                                 <div class="btn-quickview">

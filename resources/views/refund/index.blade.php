@@ -19,7 +19,8 @@
                     <tr>
                         <th>Aksi</th>
                         <th>No</th>
-                        <th>Nama Refund</th>
+                        <th>ID Member</th>
+                        <th>ID Order</th>
                         <th>Deskripsi</th>
                         <th>Gambar</th>
                     </tr>
@@ -98,7 +99,7 @@
                                 <a href="#" data-id="${val.id}" class="btn btn-danger btn-hapus">hapus</a>
                             </td>
                             <td>${index+1}</td>
-                            <td>${val.nama_member}</td>
+                            <td>${val.id_member}</td>
                             <td>${val.id_order}</td>
                             <td>${val.deskripsi}</td>
                             <td width="200px"><img src="/uploads/${val.gambar}" width="150"></td>

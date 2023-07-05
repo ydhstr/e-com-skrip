@@ -119,7 +119,7 @@
                     @endphp
 
                     @foreach ($sizes as $size)
-                    <input type="radio" name="sizes" id="{{$size}}" value="{{$size}}" class="size">
+                    <input type="radio" name="size" id="{{$size}}" value="{{$size}}" class="size">
                     <label for="{{$size}}" style="margin-right: 20px">{{$size}}</label>
                     @endforeach
                 </div>
@@ -328,5 +328,19 @@
         });
     });
 </script>
+<script>
+    $(document).ready(function() {
+        $('form[name="checkout"]').submit(function(event) {
+            var selectedColor = $('input[name="color"]:checked').val();
+            var selectedSize = $('input[name="sizes"]:checked').val();
+
+            if (selectedColor === undefined || selectedSize === undefined) {
+                event.preventDefault(); // Mencegah pengiriman formulir
+                alert('Mohon pilih warna dan ukuran.');
+            }
+        });
+    });
+</script>
+
 @endpush
 

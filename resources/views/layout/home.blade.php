@@ -152,7 +152,7 @@
                                                             <div class="col-md-3 megamenu-item">
                                                                 <ul class="menu-list">
                                                                     <li>
-                                                                        <span><a href="/products/{{$store->id}}">{{$store->nama_store}}</a></span>
+                                                                        <span><a href="/store/{{$store->id}}">{{$store->nama_store}}</a></span>
                                                                     </li>
                                                                 </ul>
                                                             </div>
@@ -171,14 +171,14 @@
                                         </li>
 
                                         <!-- Mobile search -->
-                                        <li id="mobile-search" class="hidden-lg hidden-md">
+                                        {{-- <li id="mobile-search" class="hidden-lg hidden-md">
                                             <form method="get" class="mobile-search">
                                                 <input type="search" class="form-control" placeholder="Search...">
                                                 <button type="submit" class="search-button">
                                                     <i class="fa fa-search"></i>
                                                 </button>
                                             </form>
-                                        </li>
+                                        </li> --}}
 
                                     </ul> <!-- end menu -->
                                 </div> <!-- end collapse -->
@@ -193,11 +193,11 @@
                                         <a href="/login_member">Login </a>
                                         @endif
                                     </li>
-                                    <li class="nav-search-wrap style-2 hidden-sm hidden-xs">
+                                    {{-- <li class="nav-search-wrap style-2 hidden-sm hidden-xs">
                                         <a href="#" class="nav-search search-trigger">
                                             <i class="fa fa-search"></i>
                                         </a>
-                                    </li>
+                                    </li> --}}
                                     <li class="nav-cart">
                                         <div class="nav-cart-outer">
                                             <div class="nav-cart-inner">

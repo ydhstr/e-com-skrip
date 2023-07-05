@@ -67,10 +67,19 @@
                                 </div>
 
                                 <span class="price">
+                                    @if ($product->diskon)
+                                                <del>
+                                                     <span>Rp. {{number_format($product->harga)}}</span>
+                                                </del>
+                                                <ins>
+                                                    <span class="amount">Rp. {{number_format($product->harga - $product->diskon)}}</span>
+                                                </ins>
+                                    @else
                                     <ins>
-                                        <span class="amount">Rp. {{number_format($product->harga)}}</span>
-                                    </ins>
-                                </span>
+                                               <span>Rp. {{number_format($product->harga)}}</span>
+                                            </ins>
+                                    @endif
+                                                </span>
                             </div>
                         </div> <!-- end product -->
                         @endforeach
