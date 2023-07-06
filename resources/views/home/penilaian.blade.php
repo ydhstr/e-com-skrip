@@ -21,13 +21,13 @@
                 <label for="">Deskripsi
                     <abbr class="required" title="required">*</abbr>
                 </label>
-                <textarea name="deskripsi" id="" placeholder="Deskripsi" class="form-control" rows="2"></textarea>
+                <textarea name="deskripsi" id="" placeholder="Deskripsi" class="form-control" rows="2" required></textarea>
                 
                 <div class="contact-file mb-50">
                     <label for="">Gambar
                         <abbr class="required" title="required">*</abbr>
                     </label>
-                    <input name="gambar" id="gambar" type="file">
+                    <input name="gambar" id="gambar" type="file"required>
                 </div>
                 
                 <input type="submit" class="btn btn-lg btn-dark" value="submit" id="">

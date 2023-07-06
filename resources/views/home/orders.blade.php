@@ -86,7 +86,8 @@
                             <td>{{$order->created_at}}</td>
                             <td>Rp. {{number_format($order->grand_total)}}</td>
                             <td>{{$order->status}}</td>
-                            <td><form action="/refund" method="POST" style="display: inline;">
+                            <td><form action="/keluhan" method="POST" style="display: inline;">
+                                @csrf
                             <button type="submit" class="btn btn-success">LAPORAN</button>
                             </form></td>
                         </tr>

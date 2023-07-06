@@ -326,8 +326,14 @@ class HomeController extends Controller
         return redirect('/penilaian');
     }
 
+    public function refund()
+    {
+        $about = About::first();
+        $orders = Order::all();
+        return view('home.laporan', compact('about','orders'));
+    }
     public function keluhan(Request $request)
-{ 
+    { 
     if (!Auth::guard('webmember')->check()) {
         return redirect('/login_member');
     }
@@ -357,15 +363,7 @@ class HomeController extends Controller
 
     $refund = Refund::create($input);
     return redirect('/refund');
-}
-
-    
-    public function refund()
-    {
-        $about = About::first();
-        $orders = Order::all();
-        return view('home.laporan', compact('about','orders'));
-    }
+        }
 
     
 }

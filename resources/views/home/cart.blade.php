@@ -64,20 +64,7 @@
                             </tbody>
                         </table>
                     </div>
-
-                    <div class="row mb-50">
-                        <div class="col-md-5 col-sm-12">
-                        </div>
-                        <div class="col-md-7">
-                            <div class="actions">
-                                <div class="wc-proceed-to-checkout">
-                                    <a href="#" class="btn btn-lg btn-dark checkout"><span>proceed to
-                                            checkout</span></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
+                    <div class="row mb-50"></div>
                 </div> <!-- end col -->
             </div> <!-- end row -->
 
@@ -142,6 +129,18 @@
                                 </tr>
                             </tbody>
                         </table>
+                        <div class="row mb-50">
+                            <div class="col-md-5 col-sm-12">
+                            </div>
+                            <div class="col-md-7">
+                                <div class="actions">
+                                    <div class="wc-proceed-to-checkout">
+                                        <a href="#" class="btn btn-lg btn-dark checkout"><span>proceed to
+                                                checkout</span></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
                     </div>
                 </div> <!-- end col cart totals -->

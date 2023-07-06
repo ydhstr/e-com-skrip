@@ -282,65 +282,77 @@
 @endsection
 @push('js')
 <script>
-    $(function(){
-        $('.add-to-cart').click(function(e){
-            var id_member = null;
-            var id_barang = {{$product->id}};
-            var jumlah = $('.jumlah').val();
-            var size = $('.size').val();
-            var color = $('.color').val();
-            var harga = {{$product->harga}};
-            var diskon = {{$product->diskon}};
-            var total = (harga - diskon) * jumlah;
-            var is_checkout = 0;
-
-            @auth('webmember')
-                id_member = {{Auth::guard('webmember')->user()->id}};
-            @endauth
-
-            $.ajax({
-                url: '/add_to_cart',
-                method: 'POST',
-                headers: {
-                    'X-CSRF-TOKEN': "{{csrf_token()}}",
-                },
-                data: {
-                    id_member: id_member,
-                    id_barang: id_barang,
-                    jumlah: jumlah,
-                    size: size,
-                    color: color,
-                    total: total,
-                    is_checkout: is_checkout,
-                },
-                success: function(response) {
-                    if (response === 'success') {
-                        id_member = id_member || ""; // Set id_member to an empty string if it's null
-                    } else if (response === 'failed') {
-                        window.location.replace("failed");
-                    }
-                    window.location.href = '/cart';
-                },
-                error: function() {
-                    // Handle error cases if necessary
-                }
-            })
-        });
-    });
-</script>
-<script>
-    $(document).ready(function() {
-        $('form[name="checkout"]').submit(function(event) {
-            var selectedColor = $('input[name="color"]:checked').val();
-            var selectedSize = $('input[name="sizes"]:checked').val();
-
-            if (selectedColor === undefined || selectedSize === undefined) {
-                event.preventDefault(); // Mencegah pengiriman formulir
-                alert('Mohon pilih warna dan ukuran.');
+    $(function() {
+      $('.add-to-cart').click(function(e) {
+        e.preventDefault(); // Prevent default click behavior
+  
+        var id_member = null;
+        var id_barang = {{$product->id}};
+        var jumlah = $('.jumlah').val();
+        var size = $('.size:checked').val();
+        var color = $('.color:checked').val();
+        var harga = {{$product->harga}};
+        var diskon = {{$product->diskon}};
+        var total = (harga - diskon) * jumlah;
+        var is_checkout = 0;
+  
+        @auth('webmember')
+        id_member = {{Auth::guard('webmember')->user()->id}};
+        @endauth
+  
+        // Check if color and size are selected
+        if (color === undefined || size === undefined) {
+          alert('Please select color and size.');
+          return; // Stop further execution
+        }
+  
+        // Check if the user is logged in
+        @guest('webmember')
+        alert('Please log in to add the item to your cart.');
+        window.location.href = '/login_member';
+        return; // Stop further execution
+        @endguest
+  
+        $.ajax({
+          url: '/add_to_cart',
+          method: 'POST',
+          headers: {
+            'X-CSRF-TOKEN': "{{csrf_token()}}",
+          },
+          data: {
+            id_member: id_member,
+            id_barang: id_barang,
+            jumlah: jumlah,
+            size: size,
+            color: color,
+            total: total,
+            is_checkout: is_checkout,
+          },
+          success: function(response) {
+            if (response === 'success') {
+              id_member = id_member || ""; // Set id_member to an empty string if it's null
+            } else if (response === 'failed') {
+              window.location.replace("failed");
             }
+            window.location.href = '{{ Auth::guard("webmember")->check() ? "/cart" : "/login_member" }}';
+          },
+          error: function() {
+            // Handle error cases if necessary
+          }
         });
+      });
+  
+      $('form[name="checkout"]').submit(function(event) {
+        var selectedColor = $('input[name="color"]:checked').val();
+        var selectedSize = $('input[name="size"]:checked').val();
+  
+        if (selectedColor === undefined || selectedSize === undefined) {
+          event.preventDefault(); // Prevent form submission
+          alert('Please select color and size.');
+        }
+      });
     });
-</script>
+  </script>
+  
 
 @endpush
-

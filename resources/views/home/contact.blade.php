@@ -11,16 +11,16 @@
                 <form name="aduan" id="aduan" action="/aduan" method="POST">
                     @csrf
                     <div class="contact-name">
-                        <input name="nama" id="nama" type="text" placeholder="Name*">
+                        <input name="nama" id="nama" type="text" placeholder="Name*" required>
                     </div>
                     <div class="contact-email">
-                        <input name="email" id="email" type="email" placeholder="E-mail*">
+                        <input name="email" id="email" type="email" placeholder="E-mail*" required>
                     </div>
                     <div class="contact-subject">
-                        <input name="subjek" id="subjek" type="text" placeholder="Subject">
+                        <input name="subjek" id="subjek" type="text" placeholder="Subject" required>
                     </div>
 
-                    <textarea name="deskripsi" id="deskripsi" placeholder="Message" rows="6"></textarea>
+                    <textarea name="deskripsi" id="deskripsi" placeholder="Message" rows="6" required></textarea>
 
                     <input type="submit" class="btn btn-lg btn-dark btn-submit" value="submit" id="">
                 </form>

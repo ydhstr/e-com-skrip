@@ -167,6 +167,7 @@
                 $('input[name="jumlah"]').val(grandTotal);
             } else if (paymentMethod === 'COD') {
                 $('input[name="jumlah"]').val('0');
+                $('input[name="no_rekening"]').val('0');
             }
         });
     });
