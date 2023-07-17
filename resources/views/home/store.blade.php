@@ -10,12 +10,14 @@
             <div class="col-md-6 offset-md-3">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">{{ $store->nama }}</h4>
-                        <p class="card-text">{{ $store->alamat }}</p>
+                        <a {{$store->id}}>
+                        <h4 class="card-title">{{ $store->nama_store }}</h4>
+                        <p class="card-text">{{ $store->alamat }}</p> 
                         <div class="social-icons nobase">
                             <a href=""><i class="fa fa-instagram"></i></a>
-                            <a href=""><i class="fa fa-phone"></i></a>
-                            <a href=""><i class="fa fa-building"></i></a>
+                            <a><i class="fa fa-phone">{{ $store->no_hp }}</i></a>
+                            <a href=""><i class="fa fa-shopping-cart"></i></a>
+                        </a>
                         </div>
                     </div>
                 </div>
@@ -24,7 +26,7 @@
     </div>
 </section>
 
-<!-- Catalogue -->
+{{-- <!-- Catalogue -->
 <section class="section-wrap pt-40 pb-40 catalogue">
     <div class="container relative">
         <!-- Filter -->
@@ -77,10 +79,10 @@
                         </div> <!-- end product -->
                         @endforeach
                     </div> <!-- end row -->
-                </div> <!-- end grid mode -->
+                </div> <!-- end grid mode --> --}}
 
                 <!-- Pagination -->
-                <div class="pagination-wrap clearfix">
+                {{-- <div class="pagination-wrap clearfix">
                     @if ($products->count() > 0)
                         <p class="result-count">Showing: {{ $products->firstItem() }} - {{ $products->lastItem() }} of {{ $products->total() }} results</p>
                         {{ $products->links() }}
@@ -93,7 +95,7 @@
                         <a href="#">2</a>
                         <a href="#"><i class="fa fa-angle-right"></i></a>
                     </nav>
-                </div>
+                </div> --}}
             </div> <!-- end col -->
         </div> <!-- end row -->
     </div> <!-- end container -->

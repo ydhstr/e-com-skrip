@@ -49,7 +49,7 @@
                                         <div class="form-group">
                                             <input type="email" class="form-control form-control-user email"
                                                 id="exampleInputEmail" aria-describedby="emailHelp"
-                                                placeholder="Enter Email Address..." name="email">
+                                                placeholder="Enter Email Address..." name="email" required>
                                             @error('email')
                                             <small class="text-danger">
                                                 {{$message}}
@@ -58,7 +58,7 @@
                                         </div>
                                         <div class="form-group">
                                             <input type="password" class="form-control form-control-user password"
-                                                id="exampleInputPassword" placeholder="Password" name="password">
+                                                id="exampleInputPassword" placeholder="Password" name="password" required>
                                             @error('password')
                                             <small class="text-danger">
                                                 {{$message}}

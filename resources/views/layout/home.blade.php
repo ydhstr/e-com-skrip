@@ -141,7 +141,10 @@
                                                 </li>
                                             </ul>
                                         </li>
-                                        {{-- <li class="dropdown">
+                                        @php
+                                        $stores = App\Models\Store::all();
+                                        @endphp
+                                        <li class="dropdown">
                                             <a href="/store">Store</a>
                                             <i class="fa fa-angle-down dropdown-trigger"></i>
                                             <ul class="dropdown-menu megamenu-wide">
@@ -161,7 +164,7 @@
                                                     </div>
                                                 </li>
                                             </ul>
-                                        </li> --}}
+                                        </li>
                                         <li class="dropdown">
                                             <a href="/faq">F.A.Q</a>
                                         </li>

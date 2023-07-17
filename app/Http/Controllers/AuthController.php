@@ -107,11 +107,11 @@ class AuthController extends Controller
                 $request->session()->regenerate();
                 return redirect('/');
             } else {
-                Session::flash('failed', "Password salah");
+                Session::flash('failed', "Email atau password salah");
                 return redirect('/login_member');
             }
         } else {
-            Session::flash('failed', "Email Tidak ditemukan");
+            Session::flash('failed', "Email atau password salah");
             return redirect('/login_member');
         }
     }
@@ -212,11 +212,11 @@ class AuthController extends Controller
                 $request->session()->regenerate();
                 return redirect('/dashboard');
             } else {
-                Session::flash('failed', "Password salah");
+                Session::flash('failed', "Email atau password salah");
                 return redirect('/login_store');
             }
         } else {
-            Session::flash('failed', "Email Tidak ditemukan");
+            Session::flash('failed', "Email atau password salah");
             return redirect('/login_store');
         }
     }

@@ -10,11 +10,11 @@
     <link rel="shortcut icon" href="/uploads/favicon.png">
 </head>
 
-<div class="flex py-10 md:py-20 px-5 md:px-32 bg-gray-200 min-h-screen">
-    <div class="flex shadow w-full flex-col-reverse lg:flex-row">
-        <div class="w-full lg:w-1/2 bg-white p-10 px-5 md:px-20">
+<div class="flex justify-center items-center py-10 md:py-20 px-5 md:px-32 bg-gray-200 min-h-screen">
+    <div class="flex shadow">
+        <div class="w-96 bg-white p-10 px-5 md:px-20">
             <h1 class="font-bold text-xl text-gray-700">Login Page</h1>
-            <p class="text-gray-600">Please login your store to start your session!</p>
+            <p class="text-gray-600">Please login to your store to start your session!</p>
 
             <br>
             @if (Session::has('errors'))
@@ -26,11 +26,11 @@
             @endif
 
             @if (Session::has('success'))
-            <p style="color: green">{{Session::get('success')}}</p>
+            <p style="color: green">{{ Session::get('success') }}</p>
             @endif
 
             @if (Session::has('failed'))
-            <p style="color: red">{{Session::get('failed')}}</p>
+            <p style="color: red">{{ Session::get('failed') }}</p>
             @endif
 
             <form action="/login_store" method="POST" class="mt-10">
@@ -56,14 +56,12 @@
                         class="w-full rounded-full bg-blue-400 hover:bg-blue-600 text-white py-2">LOGIN</button>
                 </div>
             </form>
-            <span>Dont have an account? <a href="/register_store" class="text-blue-400 hover:text-blue-600">Create
+            <span>Don't have an account? <a href="/register_store" class="text-blue-400 hover:text-blue-600">Create
                     here.</a></span>
-        </div>
-        <div class="w-full lg:w-1/2 bg-blue-400 flex justify-center items-center">
-            <img src="/uploads/store-login.png" alt="Login Image" class="w-full">
         </div>
     </div>
 </div>
+
 
 <body>
 

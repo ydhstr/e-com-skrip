@@ -287,11 +287,10 @@ class HomeController extends Controller
         return view('home.faq');
     }
     
-    public function store($tags)
+    public function store($id_store)
     {
-        $products = Product::where('tags', $tags)->paginate(12);
-        $store = Store::all();
-        return view('home.store', compact('products','store'));
+        $store = Store::find($id_store);
+        return view('home.store', compact('store'));
     }
     public function penilaian()
     {

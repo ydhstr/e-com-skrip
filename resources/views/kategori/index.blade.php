@@ -235,9 +235,9 @@
                             location.reload();
                         }
                     },
-                   /*  fail : function(data){
+                    fail : function(data){
                         console.log(data)
-                    } */
+                    }
                 })
             });
 

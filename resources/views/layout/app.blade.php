@@ -97,6 +97,13 @@
                     <span>Pembayaran</span></a>
             </li>
             @endif
+            @if (Auth::guard('webstore')->user())
+            <li class="nav-item">
+                <a class="nav-link" href="/payment_store">
+                    <i class="fas fa-fw fa-credit-card"></i>
+                    <span>Pembayaran</span></a>
+            </li>
+            @endif
             @if (Auth::guard('web')->user())
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#laporan"

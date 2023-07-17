@@ -12,7 +12,7 @@ class PaymentController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth')->only(['list']);
+        $this->middleware('auth:web,webstore')->only(['list,list_store']);
         $this->middleware('auth:api')->only(['store', 'update', 'destroy']);
     }
 
@@ -21,6 +21,10 @@ class PaymentController extends Controller
         return view('payment.index');
     }
 
+    public function list_store()
+    {
+        return view('payment.payment_store');
+    }
     /**
      * Display a listing of the resource.
      *

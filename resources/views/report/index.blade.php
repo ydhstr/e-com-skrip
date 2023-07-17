@@ -38,7 +38,6 @@
                         <th>No</th>
                         <th>Nama Barang</th>
                         <th>Harga</th>
-                        <th>Jumlah Dibeli</th>
                         <th>Total Qty</th>
                         <th>Pendapatan</th>
                     </tr>
@@ -91,7 +90,6 @@
                             <td>${index+1}</td>
                             <td>${val.nama_barang}</td>
                             <td>${rupiah(val.harga)}</td>
-                            <td>${val.jumlah_dibeli}</td>
                             <td>${val.total_qty}</td>
                             <td>${rupiah(val.pendapatan)}</td>
                         </tr>

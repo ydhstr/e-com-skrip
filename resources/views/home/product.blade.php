@@ -353,6 +353,4 @@
       });
     });
   </script>
-  
-
 @endpush

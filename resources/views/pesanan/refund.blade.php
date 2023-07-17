@@ -52,7 +52,7 @@
 
         const token = localStorage.getItem('token')
         $.ajax({
-            url: '/api/pesanan/Refund',
+            url: '/api/pesanan/refund',
             headers: {
                 "Authorization": 'Bearer ' + token
             },
@@ -87,7 +87,7 @@
                 url : '/api/pesanan/ubah_status/' + id,
                 type : 'POST',
                 data : {
-                    status : 'Dikonfirmasi'
+                    status : 'Selesai'
                 },
                 headers: {
                     "Authorization": 'Bearer ' + token
