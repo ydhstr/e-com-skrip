@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Laporan Data Barang Diminati</title>
+    <title>Laporan Kerusakan Barang</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <link rel="shortcut icon" href="/uploads/favicon.png">
@@ -56,7 +56,7 @@
     </div>
 </center>
 <br>
-<h5><center><b>Laporan Data Barang Diminati</b></center></h5>
+<h5><center><b>Laporan Kerusakan Barang</b></center></h5>
     <h6><center><p>Dari: {{ $dari }}  Sampai: {{ $sampai }}</p></center></h6>
     <div class="card-body">
         <div class="table-responsive">
@@ -64,22 +64,20 @@
         <thead>
             <tr>
                         <th>No</th>
-                        <th>Nama Barang</th>
-                        <th>Harga</th>
-                        <th>Jumlah Dibeli</th>
-                        <th>Warna</th>
-                        <th>Total Qty</th>
+                        <th>Nama Member</th>
+                        <th>No Order</th>
+                        <th>deskripsi</th>
+                        <th>Gambar</th>
             </tr>
         </thead>
         <tbody>  
             @foreach ($report as $item)
             <tr>
                 <td class="border px-6 py-4">{{ $loop->iteration }}</td>
-                <td class="border px-6 py-4">{{ $item->nama_barang }}</td>
-                <td class="border px-6 py-4">{{ $item->harga }}</td>
-                <td class="border px-6 py-4">{{ $item->jumlah_dibeli }}</td>
-                <td class="border px-6 py-4">{{ $item->warna }}</td>
-                <td class="border px-6 py-4">{{ $item->total_qty }}</td>
+                <td class="border px-6 py-4">{{ $item->nama_member }}</td>
+                <td class="border px-6 py-4">{{ $item->id_order }}</td>
+                <td class="border px-6 py-4">{{ $item->deskripsi }}</td>
+                <td width="200px"><img src="/uploads/{{ $item->gambar }}" alt="Gambar" width="125px"></td>
             </tr>
             @endforeach
         </tbody>

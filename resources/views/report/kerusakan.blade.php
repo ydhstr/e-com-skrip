@@ -1,12 +1,12 @@
 @extends('layout.app')
 
-@section('title', 'Laporan Pembayaran Transfer')
+@section('title', 'Laporan Kerusakan Barang')
 
 @section('content')
 <div class="card shadow">
     <div class="card-header">
         <h4 class="card-title">
-            Laporan Pembayaran Transfer
+            Laporan Kerusakan Barang
         </h4>
     </div>
     <div class="card-body">
@@ -37,21 +37,18 @@
                 <thead>
                     <tr>
                         <th>No</th>
-                        <th>Tanggal</th>
-                        <th>Order</th>
-                        <th>Jumlah</th>
-                        <th>No Rekening</th>
-                        <th>Atas Nama</th>
-                        <th>Status</th>
-                        <th>Payment</th>
+                        <th>Nama Member</th>
+                        <th>No Order</th>
+                        <th>Deskripsi</th>
+                        <th>Gambar</th>
                     </tr>
                 </thead>
                 <tbody></tbody>
             </table>
             <div class="card-footer">
                 <div class="text-right">
-                    <a href="{{ route('transfer', ['dari' => request()->input('dari'), 'sampai' => request()->input('sampai')]) }}" class="btn btn-danger btn-sm"
-                        id="export-pdf">
+                    <a href="{{ route('rusakan', ['dari' => request()->input('dari'), 'sampai' => request()->input('sampai')]) }}" class="btn btn-danger btn-sm">
+                    <!-- <a href="javascript:window.print();" class="btn btn-danger btn-sm"> -->
                         <i class="fa fa-file-pdf"></i> Export PDF
                     </a>
                 </div>
@@ -74,29 +71,22 @@
         const token = localStorage.getItem('token')
 
         $.ajax({
-            url: `/api/reports/pembayaran?dari=${dari}&sampai=${sampai}`,
+            url: `/api/reports/rusak?dari=${dari}&sampai=${sampai}`,
             headers: {
                 "Authorization": 'Bearer ' + token
             },
             success: function({
                 data
             }) {
-                
                 let row;
                 data.map(function(val, index) {
-                    tgl = new Date(val.created_at)
-                    tgl.setMonth(tgl.getMonth() + 1);
-                    tgl_lengkap = `${tgl.getDate()}-${tgl.getMonth()}-${tgl.getFullYear()}`
                     row += `
                         <tr>
                             <td>${index+1}</td>
-                            <td>${tgl_lengkap}</td>
+                            <td>${val.nama_member}</td>
                             <td>${val.id_order}</td>
-                            <td>${val.jumlah}</td>
-                            <td>${val.no_rekening}</td>
-                            <td>${val.atas_nama}</td>
-                            <td>${val.status}</td>
-                            <td>${val.payment}</td>
+                            <td>${val.deskripsi}</td>
+                            <td width="200px"><img src="/uploads/${val.gambar}" width="125"></td>
                         </tr>
                         `;
                 });
@@ -106,4 +96,5 @@
 
     });
 </script>
+
 @endpush

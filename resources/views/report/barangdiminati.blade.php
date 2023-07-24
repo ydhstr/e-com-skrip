@@ -10,9 +10,8 @@
         </h4>
     </div>
     <div class="card-body">
-
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-12">
                 <form>
                     <div class="form-group">
                         <label for="">Dari</label>
@@ -25,6 +24,8 @@
                             value="{{request()->input('sampai')}}">
                     </div>
                     <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-3">
                         <button type="submit" class="btn btn-primary btn-block">Submit</button>
                     </div>
                 </form>

@@ -71,7 +71,6 @@
                                 <input type="text" class="input-text" placeholder value name="jumlah"
                                     id="billing_first_name">
                             </p>
-                             <p for="">Apabila Memilih COD harap ditulis "Kosong" pada No Rekening dan Pada nominal Transfer Masukan Angaka "0" </p>
                             <div class="clear"></div>
 
                         </div>
@@ -165,6 +164,7 @@
 
             if (paymentMethod === 'Transfer') {
                 $('input[name="jumlah"]').val(grandTotal);
+                $('input[name="no_rekening"]').val('');
             } else if (paymentMethod === 'COD') {
                 $('input[name="jumlah"]').val('0');
                 $('input[name="no_rekening"]').val('0');

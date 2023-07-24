@@ -97,13 +97,13 @@
                     <span>Pembayaran</span></a>
             </li>
             @endif
-            @if (Auth::guard('webstore')->user())
+            {{-- @if (Auth::guard('webstore')->user())
             <li class="nav-item">
                 <a class="nav-link" href="/payment_store">
                     <i class="fas fa-fw fa-credit-card"></i>
                     <span>Pembayaran</span></a>
             </li>
-            @endif
+            @endif --}}
             @if (Auth::guard('web')->user())
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#laporan"
@@ -121,6 +121,7 @@
                         <a class="collapse-item" href="/laporan/refund">Laporan Barang Refund</a>
                         <a class="collapse-item" href="/laporan/codreport">Laporan Pembayaran COD</a>
                         <a class="collapse-item" href="/laporan/beli">Laporan Pembelian</a>
+                        <a class="collapse-item" href="/laporan/kerusakan">Laporan Kerusakan</a>
                     </div>
                 </div>
             </li>

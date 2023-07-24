@@ -10,7 +10,7 @@ class ReportController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:web')->only(['index, penjualan_list, pembayaran_list, orderselesai_list, barangdiminati_list,codreport_list, pdf1, orderrefund_list']);
+        $this->middleware('auth:web')->only(['index, penjualan_list, pembayaran_list, orderselesai_list, barangdiminati_list,codreport_list, pdf1, orderrefund_list, kerusakan_list']);
         $this->middleware('auth:api')->only(['get_reports, penjualan, pembayaran, orderselesai, barangdiminati,pembayarancod,pdf1']);
     }
 
@@ -42,11 +42,15 @@ class ReportController extends Controller
     {
         return view('report.barangdiminati');
     }
-    
     public function beli_list()
     {
         return view('report.pembelian');
     }
+    public function kerusakan_list()
+    {
+        return view('report.kerusakan');
+    }
+
 
 public function get_reports(Request $request)
 {
@@ -117,7 +121,6 @@ public function pembayaran(Request $request)
             payments.payment'))
         ->whereRaw("date(payments.created_at) >= '$request->dari'")
         ->whereRaw("date(payments.created_at) <=' $request->sampai'")
-        ->where('status', 'DITERIMA')
         ->where('payment', 'Transfer')
         ->get();
 
@@ -232,7 +235,6 @@ public function transfer(Request $request)
             payments.payment'))
         ->whereRaw("date(payments.created_at) >= '$request->dari'")
         ->whereRaw("date(payments.created_at) <=' $request->sampai'")
-        ->where('status', 'DITERIMA')
         ->where('payment', 'COD')
         ->get();
 
@@ -276,5 +278,33 @@ public function pembelian(Request $request)
     $response = $this->users($request);
     $report = $response->getData()->data;
     return view('report.pembelianpdf', compact('report', 'dari', 'sampai'));
+}
+
+public function rusak(Request $request)
+{
+    $reports = DB::table('refunds')
+    ->join('members', 'members.id', '=', 'refunds.id_member')
+    ->select(DB::raw('
+    members.nama_member as nama_member,
+    refunds.id_order as id_order,
+    refunds.deskripsi as deskripsi,
+    refunds.gambar as gambar'))
+        ->whereRaw("date(refunds.created_at) >= '$request->dari'")
+        ->whereRaw("date(refunds.created_at) <=' $request->sampai'")
+    ->get();
+    return response()->json([
+    'data' => $reports
+]);
+}
+
+public function rusakan(Request $request)
+{
+    // Ambil data dari fungsi rusak()
+    $response = $this->rusak($request);
+    $report = $response->getData()->data;
+    $dari = $request->dari;
+    $sampai = $request->sampai;
+
+    return view('report.kerusakanpdf', compact('report', 'dari', 'sampai'));
 }
 }

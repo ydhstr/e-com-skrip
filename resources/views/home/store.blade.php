@@ -4,30 +4,31 @@
 
 @section('content')
 <!-- Store Information -->
-<section class="section-wrap pt-20 pb-10">
+<section class="section-wrap intro pb-0">
     <div class="container">
         <div class="row">
-            <div class="col-md-6 offset-md-3">
-                <div class="card">
-                    <div class="card-body">
-                        <a {{$store->id}}>
-                        <h4 class="card-title">{{ $store->nama_store }}</h4>
-                        <p class="card-text">{{ $store->alamat }}</p> 
-                        <div class="social-icons nobase">
-                            <a href=""><i class="fa fa-instagram"></i></a>
-                            <a><i class="fa fa-phone">{{ $store->no_hp }}</i></a>
-                            <a href=""><i class="fa fa-shopping-cart"></i></a>
-                        </a>
-                        </div>
+            <div class="col-sm-8 mb-30">
+                <a {{$store->id}}>
+                <h4 class="intro-heading">{{ $store->nama_store }}</h4>
+                <p class="card-text"><a href="https://www.google.com/maps/search/?api=1&query={{ urlencode($store->alamat) }}">{{ $store->alamat }}</a></p>
+                <br>
+            </a> 
+                            <div class="social-icons nobase">
+                                <ul class=" m-auto">
+                                <li> 
+                                    <li><a href="https://www.instagram.com/{{ $store->social_media }}"><i class="fa fa-instagram fa-lg"></i>{{ $store->social_media }}</a></li>
+                                    <li><a><i class="fa fa-phone fa-lg">{{ $store->no_hp }}</a></i></li>
+                                    <li><a href="https://shopee.com/search?keyword={{ urlencode($store->online_store) }}"><i class="fa fa-shopping-cart fa-lg"></i>{{ $store->online_store }}</a></li>
+                                </li>
+                                </ul>
+                            </div>
                     </div>
                 </div>
-            </div>
-        </div>
     </div>
 </section>
-
-{{-- <!-- Catalogue -->
-<section class="section-wrap pt-40 pb-40 catalogue">
+    
+<!-- Catalogue -->
+<section class="section-wrap pt-30 pb-40 catalogue">
     <div class="container relative">
         <!-- Filter -->
         <div class="shop-filter">
@@ -37,7 +38,6 @@
                 <a class="list" id="list"></a>
             </div>
         </div>
-
         <div class="row">
             <div class="col-md-12 catalogue-col right mb-50">
                 <div class="shop-catalogue grid-view">
@@ -79,7 +79,7 @@
                         </div> <!-- end product -->
                         @endforeach
                     </div> <!-- end row -->
-                </div> <!-- end grid mode --> --}}
+                </div> <!-- end grid mode -->
 
                 <!-- Pagination -->
                 {{-- <div class="pagination-wrap clearfix">

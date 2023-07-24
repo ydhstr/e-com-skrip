@@ -290,7 +290,8 @@ class HomeController extends Controller
     public function store($id_store)
     {
         $store = Store::find($id_store);
-        return view('home.store', compact('store'));
+        $products = Product::all();
+        return view('home.store', compact('store','products'));
     }
     public function penilaian()
     {

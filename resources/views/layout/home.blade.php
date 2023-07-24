@@ -145,7 +145,7 @@
                                         $stores = App\Models\Store::all();
                                         @endphp
                                         <li class="dropdown">
-                                            <a href="/store">Store</a>
+                                            <a>Store</a>
                                             <i class="fa fa-angle-down dropdown-trigger"></i>
                                             <ul class="dropdown-menu megamenu-wide">
                                                 <li>

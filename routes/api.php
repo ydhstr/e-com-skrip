@@ -62,5 +62,6 @@ Route::group([
             Route::get('reports/codreport', [ReportController::class, 'pembayarancod']);
             Route::get('reports/orderrefund', [ReportController::class, 'orderrefund']);
             Route::get('reports/users', [ReportController::class, 'users']);
+            Route::get('reports/rusak', [ReportController::class, 'rusak']);
         }
     );

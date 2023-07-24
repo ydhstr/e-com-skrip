@@ -64,6 +64,7 @@ Route::get('/laporan/barangdiminati', [ReportController::class, 'barangdiminati_
 Route::get('/laporan/codreport', [ReportController::class, 'codreport_list']);
 Route::get('/laporan/refund', [ReportController::class, 'orderrefund_list']);
 Route::get('/laporan/beli', [ReportController::class, 'beli_list']);
+Route::get('/laporan/kerusakan', [ReportController::class, 'kerusakan_list']);
 
 Route::get('/tentang', [TentangController::class, 'index']);
 Route::post('/tentang/{about}', [TentangController::class, 'update']);
@@ -105,3 +106,4 @@ Route::get('/laporan/minat', [ReportController::class, 'minat'])->name('minat');
 Route::get('/laporan/kembali', [ReportController::class, 'kembali'])->name('kembali');
 Route::get('/laporan/cod', [ReportController::class, 'cod'])->name('cod');
 Route::get('/laporan/pembelian', [ReportController::class, 'pembelian'])->name('pembelian');
+Route::get('/laporan/rusakan', [ReportController::class, 'rusakan'])->name('rusakan');
