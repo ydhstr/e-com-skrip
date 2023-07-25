@@ -69,7 +69,7 @@
                                     <abbr class="required" title="required">*</abbr>
                                 </label>
                                 <input type="text" class="input-text" placeholder value name="jumlah"
-                                    id="billing_first_name">
+                                    id="billing_first_name" disabled>
                             </p>
                             <div class="clear"></div>
 
@@ -82,7 +82,7 @@
                     <!-- Your Order -->
                     <div class="col-md-4">
                         <div class="order-review-wrap ecommerce-checkout-review-order" id="order_review">
-                            <h2 class="heading uppercase bottom-line full-grey">Your Order</h2>
+                            <h2 class="heading uppercase bottom-line full-grey">Pesananmu</h2>
                             <table class="table shop_table ecommerce-checkout-review-order-table">
                                 <tbody>
                                     <tr class="order-total">
@@ -99,16 +99,14 @@
                             </table>
 
                             <div id="payment" class="ecommerce-checkout-payment">
-                                <h2 class="heading uppercase bottom-line full-grey">Payment Method</h2>
+                                <h2 class="heading uppercase bottom-line full-grey">Pilih Pembayaran</h2>
                                 <ul class="payment_methods methods">
                                     <li class="payment_method_bacs">
                                         <input id="payment_method_bacs" type="radio" class="input-radio"
                                             name="payment" value="Transfer">
-                                        <label for="payment_method_bacs">Direct Bank Transfer</label>
+                                        <label for="payment_method_bacs">Bank Transfer</label>
                                         <div class="payment_box payment_method_bacs">
-                                            <p>Make your payment directly into our bank account. Please use your Order
-                                                ID as the payment reference. Your order wont be shipped until the funds
-                                                have cleared in our account.</p>
+                                            <p>Pembayaran dengan melalui perantara transfer bank.</p>
                                             <p>Atas Nama : {{$about->atas_nama}}</p>
                                             <p>No Rekening : {{$about->no_rekening}}</p>
                                         </div>
@@ -117,7 +115,7 @@
                                 <input id="payment_method_cheque" type="radio" class="input-radio" name="payment" value="COD">
                                     <label for="payment_method_cheque">Cash On Delivery</label>
                                 <div class="payment_box payment_method_cheque">
-                                    <p>Please send your cheque to Store Name, Store Street, Store Town, Store State / County, Store Postcode.</p>
+                                    <p>Pengiriman Bayar saat barang sudah sammpai</p>
                             </div>
                         </li>
                     </ul>

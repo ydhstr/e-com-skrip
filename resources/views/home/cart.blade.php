@@ -86,10 +86,10 @@
                         </select>
                     </p>
 
-                    <div class="row row-10">
+                    <div class="row row-10" style="display: none;">
                         <div class="col-sm-12">
                             <p class="form-row form-row-wide">
-                                <input type="text" class="input-text berat" placeholder="Berat" name="berat" id="Berat">
+                                <input type="text" class="input-text berat" placeholder="Berat" name="berat" id="Berat" value="5">
                             </p>
                         </div>
                     </div>

@@ -11,7 +11,7 @@
             <div class="ecommerce col-xs-12">
                 
                 <h2>My Orders</h2>
-                <span>Tabel Pesanan</span>
+                <span>Menampilkan Status Pesanan</span>
                 <table class="table table-ordered table-hover table-striped">
                     <thead>
                         <th>No</th>
@@ -50,7 +50,7 @@
                 </table>
 
                 <h2>My Payments</h2>
-                <span>Tabel Pembayaran</span>
+                <span>Menampilkan Status Pembayaran</span>
                 <table class="table table-ordered table-hover table-striped">
                     <thead>
                         <th>No</th>
@@ -73,7 +73,7 @@
                 </table>
 
                 <h2>Refund Orders</h2>
-                <span>Tabel Pengembalian</span>
+                <span>Menampilkan List Barang Pengembalian</span>
                 <table class="table table-ordered table-hover table-striped">
                     <thead>
                         <th>No</th>
